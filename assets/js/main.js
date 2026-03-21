@@ -120,6 +120,42 @@
 	// Scrolly.
 		$('.scrolly').scrolly();
 
+	// Scroll-aware nav + back to top.
+		var lastScrollTop = 0,
+			scrollTicking = false;
+
+		function updateScrollState() {
+
+			var currentScrollTop = $window.scrollTop();
+
+			if (currentScrollTop <= 64) {
+				$body.removeClass('nav-hidden show-back-to-top');
+			}
+			else {
+
+				$body.addClass('show-back-to-top');
+
+				if (currentScrollTop > lastScrollTop + 8)
+					$body.addClass('nav-hidden');
+				else if (currentScrollTop < lastScrollTop - 8)
+					$body.removeClass('nav-hidden');
+
+			}
+
+			lastScrollTop = Math.max(currentScrollTop, 0);
+			scrollTicking = false;
+
+		}
+
+		$window.on('scroll.navVisibility', function() {
+
+			if (!scrollTicking) {
+				window.requestAnimationFrame(updateScrollState);
+				scrollTicking = true;
+			}
+
+		});
+
 	// Background.
 		$wrapper._parallax(0.925);
 
