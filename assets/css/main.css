@@ -489,6 +489,50 @@ blockquote, q {
 
 	}
 
+/* Go To Top Sticker */
+
+	body.prism-theme #backToTop {
+		background: transparent !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		bottom: 1.4rem;
+		box-shadow: none !important;
+		height: 7.25rem;
+		overflow: visible;
+		right: 1.4rem;
+		width: 7.25rem;
+	}
+
+	body.prism-theme #backToTop img {
+		display: block;
+		filter: drop-shadow(0 1rem 1.25rem rgba(15, 23, 42, 0.28));
+		height: 100%;
+		object-fit: contain;
+		transform-origin: center bottom;
+		transition: transform 0.2s ease, filter 0.2s ease;
+		width: 100%;
+	}
+
+	body.prism-theme #backToTop:hover {
+		transform: translateY(-0.2rem) scale(1.04);
+	}
+
+	body.prism-theme #backToTop:hover img {
+		filter: drop-shadow(0 1.2rem 1.5rem rgba(37, 99, 235, 0.34));
+		transform: rotate(-2deg);
+	}
+
+	@media screen and (max-width: 736px) {
+
+		body.prism-theme #backToTop {
+			bottom: 0.85rem;
+			height: 5.5rem;
+			right: 0.85rem;
+			width: 5.5rem;
+		}
+
+	}
+
 /* PRISM Theme Adaptation */
 
 	body.prism-theme {
@@ -6413,8 +6457,52 @@ input, select, textarea {
 			padding: 1.35rem;
 		}
 
-		body.prism-theme .prism-section h2 {
-			font-size: 1.45rem;
+	body.prism-theme .prism-section h2 {
+		font-size: 1.45rem;
+	}
+
+}
+
+/* Go To Top Sticker */
+
+	body.prism-theme #backToTop {
+		background: transparent !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		bottom: 1.4rem !important;
+		box-shadow: none !important;
+		height: 7.25rem !important;
+		overflow: visible !important;
+		right: 1.4rem !important;
+		width: 7.25rem !important;
+	}
+
+	body.prism-theme #backToTop img {
+		display: block;
+		filter: drop-shadow(0 1rem 1.25rem rgba(15, 23, 42, 0.28));
+		height: 100%;
+		object-fit: contain;
+		transform-origin: center bottom;
+		transition: transform 0.2s ease, filter 0.2s ease;
+		width: 100%;
+	}
+
+	body.prism-theme #backToTop:hover {
+		transform: translateY(-0.2rem) scale(1.04);
+	}
+
+	body.prism-theme #backToTop:hover img {
+		filter: drop-shadow(0 1.2rem 1.5rem rgba(37, 99, 235, 0.34));
+		transform: rotate(-2deg);
+	}
+
+	@media screen and (max-width: 736px) {
+
+		body.prism-theme #backToTop {
+			bottom: 0.85rem !important;
+			height: 5.5rem !important;
+			right: 0.85rem !important;
+			width: 5.5rem !important;
 		}
 
 	}
