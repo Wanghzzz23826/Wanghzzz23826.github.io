@@ -1,0 +1,34 @@
+---
+import type { PostEntry } from '../lib/posts';
+import { formatDate, getPostUrl } from '../lib/posts';
+
+interface Props {
+  post: PostEntry;
+  index?: number;
+}
+
+const { post, index = 0 } = Astro.props;
+const url = getPostUrl(post);
+const fallbackImages = ['/images/pic09.jpg', '/images/pic07.jpg', '/images/pic06.jpg', '/images/pic05.jpg'];
+const coverImage = post.data.image || fallbackImages[index % fallbackImages.length];
+---
+<article class="blog-card firefly-post-card">
+  <div class="firefly-post-copy">
+    <div class="post-meta">
+      {post.data.pinned && <span>Pinned</span>}
+      <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+      {post.data.category && <span>{post.data.category}</span>}
+    </div>
+    <h3><a href={url}>{post.data.title}</a></h3>
+    {post.data.description && <p>{post.data.description}</p>}
+    {post.data.tags.length > 0 && (
+      <div class="post-tags" aria-label="Post tags">
+        {post.data.tags.map((tag) => <span>#{tag}</span>)}
+      </div>
+    )}
+    <a class="read-more" href={url}>Read note</a>
+  </div>
+  <a class="firefly-post-cover" href={url} aria-label={`Read ${post.data.title}`}>
+    <img src={coverImage} alt="" loading="lazy" />
+  </a>
+</article>

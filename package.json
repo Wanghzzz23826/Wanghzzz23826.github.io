@@ -1,0 +1,26 @@
+{
+  "name": "wanghzzz23826-github-io",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/sync-assets.mjs",
+    "prebuild": "node scripts/sync-assets.mjs",
+    "sync:assets": "node scripts/sync-assets.mjs",
+    "dev": "node scripts/astro-command.mjs dev",
+    "build": "node scripts/astro-command.mjs build",
+    "preview": "node scripts/astro-command.mjs preview",
+    "sync:notion": "node scripts/sync-notion.mjs"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "astro": "^5.14.0",
+    "notion-to-md": "^3.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.7.0"
+}

@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  bodyClass?: string;
+}
+
+const { title, description, bodyClass = '' } = Astro.props;
+const bodyClasses = ['is-preload', 'prism-theme', bodyClass].filter(Boolean).join(' ');
+---
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>{title}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png" />
+    <link rel="apple-touch-icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=blog-post-single-20260706" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+  </head>
+  <body class={bodyClasses} id="top">
+    <div id="wrapper" class="fade-in">
+      <slot />
+    </div>
+
+    <script is:inline src="/assets/js/jquery.min.js"></script>
+    <script is:inline src="/assets/js/jquery.scrollex.min.js"></script>
+    <script is:inline src="/assets/js/jquery.scrolly.min.js"></script>
+    <script is:inline src="/assets/js/browser.min.js"></script>
+    <script is:inline src="/assets/js/breakpoints.min.js"></script>
+    <script is:inline src="/assets/js/util.js"></script>
+    <script is:inline src="/assets/js/main.js"></script>
+  </body>
+</html>

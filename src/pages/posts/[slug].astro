@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import BackToTop from '../../components/BackToTop.astro';
+import HeaderNav from '../../components/HeaderNav.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { formatDate, getPostSlug, getPublishedPosts } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return posts.map((post) => ({
+    params: { slug: getPostSlug(post) },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const coverImage = post.data.image || '/images/pic09.jpg';
+---
+<SiteLayout
+  title={`${post.data.title} | Caiwei Wang`}
+  description={post.data.description || 'A research note from Caiwei Wang.'}
+  bodyClass="blog-page post-page firefly-blog"
+>
+  <HeaderNav active="blog" />
+
+  <main id="main" class="prism-main blog-main firefly-post-main">
+    <article class="firefly-panel post-article firefly-post-article">
+      <header class="post-header firefly-post-header">
+        <div>
+          <p class="section-kicker">{post.data.category}</p>
+          <h1>{post.data.title}</h1>
+          {post.data.description && <p class="post-description">{post.data.description}</p>}
+          <div class="post-meta">
+            <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+            {post.data.category && <span>{post.data.category}</span>}
+          </div>
+          {post.data.tags.length > 0 && (
+            <div class="post-tags" aria-label="Post tags">
+              {post.data.tags.map((tag) => <span>#{tag}</span>)}
+            </div>
+          )}
+        </div>
+        <img src={coverImage} alt="" />
+      </header>
+
+      <div class="post-content">
+        <Content />
+      </div>
+
+      <footer class="firefly-post-tools" aria-label="Post tools">
+        <div>
+          <p class="section-kicker">Post Info</p>
+          <dl>
+            <div><dt>Category</dt><dd>{post.data.category}</dd></div>
+            <div><dt>Language</dt><dd>{post.data.lang}</dd></div>
+            <div><dt>Comments</dt><dd>{post.data.comment ? 'On' : 'Off'}</dd></div>
+          </dl>
+        </div>
+        <div>
+          <p class="section-kicker">Navigation</p>
+          <a href="/blog/" class="read-more">All posts</a>
+          <a href="/" class="read-more">Home</a>
+        </div>
+      </footer>
+
+      <p class="post-back-link"><a href="/blog/">Back to all posts</a></p>
+    </article>
+  </main>
+
+  <BackToTop />
+
+  <div id="copyright">
+    <ul><li>&copy; Caiwei Wang</li><li><a href="/blog/">Back to blog</a></li></ul>
+  </div>
+</SiteLayout>

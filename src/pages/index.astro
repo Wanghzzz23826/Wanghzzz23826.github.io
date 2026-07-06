@@ -1,0 +1,173 @@
+---
+import BackToTop from '../components/BackToTop.astro';
+import HeaderNav from '../components/HeaderNav.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+<SiteLayout
+  title="Caiwei Wang | Research Profile"
+  description="Caiwei Wang | Biomedical Engineering student interested in computational neuroscience, AI, and life science research."
+>
+  <HeaderNav active="home" />
+
+  <div id="main" class="prism-main">
+    <aside class="profile-panel">
+      <div class="profile-card">
+        <div class="profile-photo">
+          <img src="/images/pic01.png" alt="Portrait placeholder for Caiwei Wang" />
+        </div>
+        <p class="eyebrow">Research Profile</p>
+        <h1>Caiwei Wang</h1>
+        <p class="profile-title">Biomedical Engineering Undergraduate</p>
+        <p class="profile-affiliation">University of Electronic Science and Technology of China</p>
+        <ul class="profile-facts">
+          <li>Chengdu, China</li>
+          <li>GPA 3.83 / 4.0</li>
+          <li>Undergraduate Researcher</li>
+        </ul>
+        <div class="profile-actions">
+          <a href="mailto:wanghz23826@email.com" class="button primary">Email Me</a>
+          <a href="#publications" class="button scrolly">View Work</a>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <h2>Research Interests</h2>
+        <div class="tag-cloud">
+          <span>Computational Neuroscience</span>
+          <span>Brain-Inspired Modeling</span>
+          <span>Neuroimaging</span>
+          <span>Machine Learning</span>
+          <span>Protein Engineering</span>
+          <span>Scientific Computing</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="content-flow">
+      <section class="prism-section" id="about">
+        <p class="section-kicker">About</p>
+        <h2>Turning interdisciplinary curiosity into reproducible research.</h2>
+        <p>I am a Biomedical Engineering student whose academic interests sit at the intersection of neuroscience, machine learning, and life science. I enjoy translating abstract research questions into structured workflows, computational models, and analyses that can be explained, reproduced, and extended.</p>
+        <div class="quick-grid">
+          <div>
+            <span>Current Focus</span>
+            <strong>Neuroscience + AI</strong>
+          </div>
+          <div>
+            <span>Degree Track</span>
+            <strong>B.M.Eng. 2023-2027</strong>
+          </div>
+          <div>
+            <span>Language</span>
+            <strong>Chinese / English</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="prism-section" id="research">
+        <p class="section-kicker">Research</p>
+        <h2>Selected Research Experience</h2>
+        <div class="timeline">
+          <article>
+            <span class="timeline-date">Jan 2026 - Present</span>
+            <h3>Large-Scale V1 Cortical Model Migration and Evolutionary Training</h3>
+            <p class="role">Undergraduate Researcher | Beijing, China</p>
+            <p>Participating in a Tsinghua University-Peking University collaborative brain-inspired modeling project. My work focuses on migrating a large-scale V1 cortical model from TensorFlow to BrainPy, adapting neuronal dynamics and simulation workflows, and supporting the early-stage replacement of BPTT with evolutionary computation.</p>
+          </article>
+          <article>
+            <span class="timeline-date">Nov 2025 - Present</span>
+            <h3>Cross-Dataset Analysis in a Brain-like Geometric Space</h3>
+            <p class="role">Undergraduate Researcher | Chengdu, China</p>
+            <p>Projecting neuroimaging datasets including SCZD, ABIDE I, ABIDE II, MDD, and ADNI into a shared geometric space derived from LLM head embeddings and graph-theoretic neuroimaging metrics for cross-dataset comparison.</p>
+          </article>
+          <article>
+            <span class="timeline-date">Jul 2025 - Aug 2025</span>
+            <h3>Ru-Yuan Lab, Shanghai Jiao Tong University</h3>
+            <p class="role">Visiting Student | Shanghai, China</p>
+            <p>Joined summer research activities in computational visual neuroscience and cognitive learning. Attended group meetings, conducted literature review and presentation, and participated in cognitive psychology experiments.</p>
+          </article>
+          <article>
+            <span class="timeline-date">Nov 2024 - Sep 2025</span>
+            <h3>Computational Protein Engineering of PETase</h3>
+            <p class="role">Undergraduate Researcher | Chengdu, China</p>
+            <p>Designed a structure-function analysis pipeline for PETase mutants using AlphaFold3, induced-fit docking, metadynamics-based scoring, and molecular dynamics simulation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="prism-section" id="publications">
+        <p class="section-kicker">Output</p>
+        <h2>Publications, Manuscripts, and Patent Work</h2>
+        <div class="paper-list">
+          <article>
+            <span class="paper-type">Publication</span>
+            <h3>Multidimensional Modeling of Brain-Inspired Artificial Neural Networks and Its Applications in Medical Image Analysis</h3>
+            <p><strong>Wang, C.</strong>, Chen, S., Jiang, X., and Yao, D. <em>Chinese Journal of Medical Instrumentation</em>. DOI: 10.12455/j.issn.1671-7104.250805.</p>
+          </article>
+          <article>
+            <span class="paper-type">Manuscript Submitted</span>
+            <h3>Function-Oriented Protein Engineering of <em>Is</em>PETase for Efficient Biodegradation of High-Crystallinity PET</h3>
+            <p>Submitted to <em>ACS Catalysis</em>. Contributed to computational analysis and structure-function evaluation.</p>
+          </article>
+          <article>
+            <span class="paper-type">Patent Application</span>
+            <h3>Highly Catalytically Active <em>Is</em>MHETase Mutants and Their Applications</h3>
+            <p>Chinese invention patent application, Publication No. CN119662597A.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="prism-section" id="awards">
+        <p class="section-kicker">Recognition</p>
+        <h2>Competitions and Awards</h2>
+        <div class="card-grid">
+          <article>
+            <h3>iGEM Competition</h3>
+            <p>Gold Medal. Modeling and Wiki Team Member for SPETEX, contributing to mutation hotspot identification, structure prediction, docking, molecular dynamics simulation, and wiki development.</p>
+          </article>
+          <article>
+            <h3>CP Cup National Competition</h3>
+            <p>National Third Prize. Worked on modeling and data analysis using sentiment analysis, Random Forest ranking, and Bayesian neural network prediction.</p>
+          </article>
+          <article>
+            <h3>Biomedical Engineering Innovation Design</h3>
+            <p>Team Leader. Developed integrated models for noninvasive prediction of carotid-femoral pulse wave velocity from PPG signals.</p>
+          </article>
+          <article>
+            <h3>Additional Honors</h3>
+            <p>Outstanding Student Scholarship, Sichuan Province Life Science Competition Second Prize, and Best Debater in Freshman Debate League.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="prism-section" id="skills">
+        <p class="section-kicker">Skills</p>
+        <h2>Technical Background</h2>
+        <div class="skill-columns">
+          <div>
+            <h3>Programming</h3>
+            <p>Python, C, JavaScript, SQL, MATLAB, Verilog HDL, Linux shell scripting</p>
+          </div>
+          <div>
+            <h3>Machine Learning & Data</h3>
+            <p>PyTorch, TensorFlow, scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, JAX</p>
+          </div>
+          <div>
+            <h3>Scientific Computing</h3>
+            <p>AlphaFold3, AutoDock, GROMACS, protein structure modeling, molecular docking, molecular dynamics simulation</p>
+          </div>
+          <div>
+            <h3>Web & Database</h3>
+            <p>HTML5, CSS3, Bootstrap, GSAP, MySQL, ER modeling, database normalization</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <BackToTop />
+
+  <div id="copyright">
+    <ul><li>&copy; Caiwei Wang</li><li>Theme inspired by <a href="https://github.com/xyjoey/PRISM">PRISM</a></li></ul>
+  </div>
+</SiteLayout>

@@ -1,0 +1,131 @@
+---
+import BackToTop from '../../components/BackToTop.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import HeaderNav from '../../components/HeaderNav.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await getPublishedPosts();
+
+  return paginate(posts, {
+    pageSize: 10
+  });
+}
+
+const { page } = Astro.props;
+const visiblePosts = page.data;
+const totalPosts = page.total ?? visiblePosts.length;
+const categories = Array.from(new Set(visiblePosts.map((post) => post.data.category).filter(Boolean)));
+const tags = Array.from(new Set(visiblePosts.flatMap((post) => post.data.tags))).slice(0, 10);
+---
+<SiteLayout
+  title="Blog | Caiwei Wang"
+  description="Research notes and personal academic updates from Caiwei Wang."
+  bodyClass="blog-page firefly-blog"
+>
+  <HeaderNav active="blog" />
+
+  <main id="main" class="prism-main blog-main firefly-blog-main">
+    <aside class="firefly-sidebar firefly-left-rail" aria-label="Blog profile">
+      <section class="firefly-panel firefly-profile-widget">
+        <img src="/images/pic08.png" alt="Blog mascot" />
+        <h1>Caiwei's Notes</h1>
+        <p>Research logs, reading notes, and small technical experiments.</p>
+        <div class="firefly-socials">
+          <a href="mailto:wanghz23826@email.com" class="icon solid fa-envelope"><span class="label">Email</span></a>
+          <a href="https://github.com/" class="icon brands fa-github"><span class="label">GitHub</span></a>
+          <a href="/" class="icon solid fa-home"><span class="label">Home</span></a>
+        </div>
+      </section>
+
+      <section class="firefly-panel firefly-note-widget">
+        <p class="section-kicker">Notice</p>
+        <h2>About This Space</h2>
+        <p>This blog is a lighter side room for ideas before they become papers, projects, or polished portfolio entries.</p>
+        <a href="/#research" class="read-more">View research</a>
+      </section>
+
+      <section class="firefly-panel firefly-category-widget">
+        <p class="section-kicker">Topics</p>
+        <div class="firefly-chip-list">
+          {(tags.length > 0 ? tags : ['Research', 'Neuroscience', 'Learning']).map((tag) => (
+            <span>#{tag}</span>
+          ))}
+        </div>
+      </section>
+    </aside>
+
+    <section class="firefly-feed" aria-label="Blog posts">
+      <div class="firefly-tabs">
+        <a href="/blog/" class="firefly-tab-home icon solid fa-home"><span class="label">Blog Home</span></a>
+        <a href="/blog/" class="active">All <span>{totalPosts}</span></a>
+        <a href="/#research">Research <span>{categories.length}</span></a>
+        <a href="/#skills">Notes <span>{tags.length}</span></a>
+      </div>
+
+      <section class="firefly-panel firefly-hero-card">
+        <p class="section-kicker">Blog</p>
+        <h1>Research Notes & Field Logs</h1>
+        <p>Independent writing space for project notes, paper reflections, learning logs, and small experiments.</p>
+      </section>
+
+      {visiblePosts.length > 0 ? (
+        <div class="blog-list firefly-post-list">
+          {visiblePosts.map((post, index) => <BlogPostCard post={post} index={index} />)}
+        </div>
+      ) : (
+        <section class="firefly-panel">
+          <p>No published posts yet.</p>
+        </section>
+      )}
+
+      {(page.url.prev || page.url.next) && (
+        <nav class="blog-pagination" aria-label="Blog pagination">
+          {page.url.prev ? <a href={page.url.prev}>Newer Posts</a> : <span />}
+          <span>Page {page.currentPage} of {page.lastPage}</span>
+          {page.url.next ? <a href={page.url.next}>Older Posts</a> : <span />}
+        </nav>
+      )}
+    </section>
+
+    <aside class="firefly-sidebar firefly-right-rail" aria-label="Blog widgets">
+      <section class="firefly-panel firefly-stats-widget">
+        <p class="section-kicker">Statistics</p>
+        <dl>
+          <div><dt>Posts</dt><dd>{totalPosts}</dd></div>
+          <div><dt>Categories</dt><dd>{categories.length}</dd></div>
+          <div><dt>Tags</dt><dd>{tags.length}</dd></div>
+          <div><dt>Status</dt><dd>Online</dd></div>
+        </dl>
+      </section>
+
+      <section class="firefly-panel firefly-info-widget">
+        <p class="section-kicker">Site Info</p>
+        <dl>
+          <div><dt>Platform</dt><dd>Astro</dd></div>
+          <div><dt>Source</dt><dd>Markdown + Notion</dd></div>
+          <div><dt>Style</dt><dd>Firefly-like</dd></div>
+        </dl>
+      </section>
+
+      <section class="firefly-panel firefly-calendar-widget">
+        <div class="firefly-calendar-head">
+          <span>2026</span>
+          <strong>July</strong>
+        </div>
+        <div class="firefly-calendar-grid" aria-label="Decorative calendar">
+          {['M', 'T', 'W', 'T', 'F', 'S', 'S', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'].map((day) => (
+            <span class={day === '6' ? 'active' : undefined}>{day}</span>
+          ))}
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <BackToTop />
+
+  <div id="copyright">
+    <ul><li>&copy; Caiwei Wang</li><li>Blog archive</li></ul>
+  </div>
+</SiteLayout>
