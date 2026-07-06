@@ -7814,3 +7814,20 @@ input, select, textarea {
 		position: fixed !important;
 		transform: translateY(0) scale(1) !important;
 	}
+
+	body.prism-theme #backToTop,
+	body.prism-theme #backToTop:hover {
+		background: transparent !important;
+		backdrop-filter: none !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+		overflow: visible !important;
+	}
+
+	body.prism-theme #backToTop img,
+	body.prism-theme #backToTop:hover img {
+		filter: drop-shadow(0 0.55rem 1rem rgba(15, 23, 42, 0.24));
+		object-fit: contain !important;
+		transform: scale(1.42) !important;
+	}
