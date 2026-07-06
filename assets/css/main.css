@@ -7465,26 +7465,89 @@ input, select, textarea {
 
 /* Shared Transparent Background Layer */
 
+	html {
+		scroll-behavior: smooth;
+	}
+
 	body.prism-theme,
 	body.prism-theme.firefly-blog {
 		background:
-			linear-gradient(135deg, rgba(248, 250, 252, 0.28), rgba(239, 246, 255, 0.2)),
 			url("../../images/bg2.png") center center / cover fixed,
-			#f8fafc !important;
+			#dce6f3 !important;
+		color: #172033;
 	}
 
 	body.prism-theme #wrapper,
 	body.prism-theme.firefly-blog #wrapper {
 		background: transparent !important;
+		isolation: isolate;
+		overflow: visible;
+		position: relative;
+	}
+
+	body.prism-theme #wrapper:after,
+	body.prism-theme.firefly-blog #wrapper:after {
+		background:
+			linear-gradient(135deg, rgba(226, 235, 248, 0.46), rgba(255, 235, 232, 0.34)),
+			url("../../images/bg2.png") center center / cover fixed,
+			#dce6f3;
+		content: '';
+		filter: blur(6px) saturate(1.06);
+		inset: -1.5rem;
+		opacity: 0;
+		pointer-events: none;
+		position: fixed;
+		transform: scale(1.03);
+		transition: opacity 0.48s ease;
+		z-index: 0;
+	}
+
+	body.prism-theme.content-backdrop #wrapper:after,
+	body.prism-theme.firefly-blog #wrapper:after {
+		opacity: 1;
+	}
+
+	body.prism-theme #header,
+	body.prism-theme .home-hero,
+	body.prism-theme #main.prism-main,
+	body.prism-theme #copyright {
+		position: relative;
+		z-index: 1;
+	}
+
+	body.prism-theme #main.prism-main {
+		scroll-margin-top: 7rem;
+	}
+
+	body.prism-theme #nav {
+		position: sticky;
+		top: 1rem;
+		z-index: 1000;
 	}
 
 	body.prism-theme #header .logo,
 	body.prism-theme #nav,
 	body.prism-theme #navPanelToggle {
-		background: rgba(255, 255, 255, 0.52) !important;
+		background: rgba(255, 255, 255, 0.62) !important;
 		backdrop-filter: blur(18px) saturate(1.08);
-		border-color: rgba(255, 255, 255, 0.64) !important;
+		border-color: rgba(255, 255, 255, 0.72) !important;
 		box-shadow: 0 1.15rem 2.65rem rgba(15, 23, 42, 0.12);
+	}
+
+	body.prism-theme.nav-hidden #nav {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+
+	body.prism-theme .profile-interest {
+		border-top: 1px solid rgba(255, 255, 255, 0.62);
+		color: #64748b;
+		font-size: 0.98rem;
+		line-height: 1.75;
+		margin: 1rem 0 0;
+		padding-top: 1rem;
+		text-align: left;
 	}
 
 	body.prism-theme .profile-card,
@@ -7492,9 +7555,9 @@ input, select, textarea {
 	body.prism-theme .prism-section,
 	body.prism-theme .blog-card,
 	body.prism-theme .post-article {
-		background: rgba(255, 255, 255, 0.48) !important;
+		background: rgba(255, 255, 255, 0.62) !important;
 		backdrop-filter: blur(18px) saturate(1.08);
-		border-color: rgba(255, 255, 255, 0.62) !important;
+		border-color: rgba(255, 255, 255, 0.72) !important;
 		box-shadow: 0 1.25rem 3rem rgba(15, 23, 42, 0.12);
 	}
 
@@ -7507,15 +7570,15 @@ input, select, textarea {
 	body.prism-theme .post-tags span,
 	body.prism-theme .post-content blockquote,
 	body.prism-theme .post-content :not(pre) > code {
-		background: rgba(255, 255, 255, 0.34) !important;
+		background: rgba(255, 255, 255, 0.48) !important;
 		backdrop-filter: blur(12px) saturate(1.06);
-		border-color: rgba(255, 255, 255, 0.54) !important;
+		border-color: rgba(255, 255, 255, 0.62) !important;
 	}
 
 	body.prism-theme.firefly-blog {
-		--firefly-panel: rgba(255, 255, 255, 0.44);
-		--firefly-panel-strong: rgba(255, 255, 255, 0.56);
-		--firefly-line: rgba(255, 255, 255, 0.56);
+		--firefly-panel: rgba(255, 255, 255, 0.58);
+		--firefly-panel-strong: rgba(255, 255, 255, 0.68);
+		--firefly-line: rgba(255, 255, 255, 0.68);
 	}
 
 	body.prism-theme.firefly-blog .firefly-panel,
@@ -7563,53 +7626,51 @@ input, select, textarea {
 		display: flex;
 		justify-content: center;
 		margin: -1rem auto 2.5rem auto;
-		min-height: min(46rem, calc(100vh - 9rem));
-		padding: clamp(4rem, 9vw, 9rem) 1.5rem clamp(4rem, 8vw, 7rem);
+		min-height: calc(100svh - 10.25rem);
+		padding: clamp(4rem, 9vw, 8rem) 1.5rem clamp(4.75rem, 8vw, 7rem);
 		position: relative;
 		text-align: center;
 		width: min(calc(100% - 3rem), 78rem);
 	}
 
 	body.prism-theme .home-hero:before {
-		background: radial-gradient(circle at center, rgba(15, 23, 42, 0.16), transparent 62%);
-		content: '';
-		inset: 12% 8%;
-		pointer-events: none;
-		position: absolute;
+		display: none;
 	}
 
 	body.prism-theme .home-hero-inner {
-		color: #ffffff;
+		color: #2563eb;
+		max-width: 62rem;
 		position: relative;
-		text-shadow: 0 0.85rem 2rem rgba(15, 23, 42, 0.32);
+		text-shadow:
+			0 0.18rem 0.45rem rgba(255, 255, 255, 0.76),
+			0 0.95rem 2rem rgba(37, 99, 235, 0.18);
 	}
 
 	body.prism-theme .home-hero-kicker {
-		color: rgba(255, 255, 255, 0.92);
-		font-family: "Source Sans Pro", Helvetica, sans-serif;
-		font-size: clamp(0.78rem, 1.2vw, 0.95rem);
-		font-weight: 900;
-		letter-spacing: 0.16em;
-		margin-bottom: 1rem;
-		text-align: center;
-		text-transform: uppercase;
+		display: none;
 	}
 
 	body.prism-theme .home-hero h1 {
-		color: #ffffff;
-		font-size: clamp(3rem, 8vw, 6.8rem);
-		letter-spacing: 0.02em;
-		line-height: 0.95;
-		margin: 0 0 1.15rem 0;
+		color: #2563eb;
+		font-family: "Segoe Script", "Lucida Handwriting", "Brush Script MT", cursive;
+		font-size: clamp(2.8rem, 7vw, 6.2rem);
+		font-style: italic;
+		font-weight: 400;
+		letter-spacing: 0.01em;
+		line-height: 1.02;
+		margin: 0 0 0.8rem 0;
 		text-transform: none;
 	}
 
 	body.prism-theme .home-hero p:not(.home-hero-kicker) {
-		color: rgba(255, 255, 255, 0.9);
-		font-size: clamp(1.05rem, 2vw, 1.35rem);
-		line-height: 1.7;
+		color: #2563eb;
+		font-family: "Segoe Script", "Lucida Handwriting", "Brush Script MT", cursive;
+		font-size: clamp(1.45rem, 3.2vw, 2.7rem);
+		font-style: italic;
+		font-weight: 400;
+		line-height: 1.28;
 		margin: 0 auto;
-		max-width: 44rem;
+		max-width: 52rem;
 		text-align: center;
 	}
 
@@ -7652,9 +7713,18 @@ input, select, textarea {
 		body.prism-theme,
 		body.prism-theme.firefly-blog {
 			background:
-				linear-gradient(135deg, rgba(248, 250, 252, 0.36), rgba(239, 246, 255, 0.3)),
 				url("../../images/bg2.png") center center / cover scroll,
-				#f8fafc !important;
+				#dce6f3 !important;
+		}
+
+		body.prism-theme #wrapper:after,
+		body.prism-theme.firefly-blog #wrapper:after {
+			background:
+				linear-gradient(135deg, rgba(226, 235, 248, 0.52), rgba(255, 235, 232, 0.42)),
+				url("../../images/bg2.png") center center / cover scroll,
+				#dce6f3;
+			filter: blur(4px) saturate(1.04);
+			inset: -0.75rem;
 		}
 
 		body.prism-theme .profile-card,
@@ -7665,18 +7735,26 @@ input, select, textarea {
 		body.prism-theme.firefly-blog .firefly-panel,
 		body.prism-theme.firefly-blog .firefly-tabs,
 		body.prism-theme.firefly-blog .firefly-post-card {
-			background: rgba(255, 255, 255, 0.54) !important;
+			background: rgba(255, 255, 255, 0.68) !important;
 		}
 
 		body.prism-theme .home-hero {
 			margin-top: 0;
-			min-height: calc(100vh - 5rem);
-			padding: 5rem 1rem 5.5rem;
+			min-height: calc(100svh - 6.5rem);
+			padding: 4.5rem 1rem 5.5rem;
 			width: calc(100% - 1.5rem);
 		}
 
 		body.prism-theme .home-hero:before {
-			inset: 20% 0;
+			display: none;
+		}
+
+		body.prism-theme .home-hero h1 {
+			font-size: clamp(2.35rem, 13vw, 4.4rem);
+		}
+
+		body.prism-theme .home-hero p:not(.home-hero-kicker) {
+			font-size: clamp(1.22rem, 7vw, 2.1rem);
 		}
 
 	}

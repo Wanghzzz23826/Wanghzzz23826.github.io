@@ -118,31 +118,39 @@
 		});
 
 	// Scrolly.
-		$('.scrolly').scrolly();
+		$('.scrolly').scrolly({
+			offset: function() {
+				return $nav.length > 0 ? $nav.outerHeight() + 24 : 0;
+			}
+		});
 
-	// Scroll-aware nav + back to top.
-		var lastScrollTop = 0,
+	// Scroll-aware backdrop + back to top.
+		var $homeHero = $('.home-hero'),
 			scrollTicking = false;
 
 		function updateScrollState() {
 
-			var currentScrollTop = $window.scrollTop();
+			var currentScrollTop = $window.scrollTop(),
+				contentBackdropTrigger = 96;
+
+			if ($homeHero.length > 0)
+				contentBackdropTrigger = $homeHero.offset().top + ($homeHero.outerHeight() * 0.72);
 
 			if (currentScrollTop <= 64) {
-				$body.removeClass('nav-hidden show-back-to-top');
+				$body.removeClass('show-back-to-top content-backdrop');
 			}
 			else {
 
 				$body.addClass('show-back-to-top');
 
-				if (currentScrollTop > lastScrollTop + 8)
-					$body.addClass('nav-hidden');
-				else if (currentScrollTop < lastScrollTop - 8)
-					$body.removeClass('nav-hidden');
+				if (currentScrollTop >= contentBackdropTrigger)
+					$body.addClass('content-backdrop');
+				else
+					$body.removeClass('content-backdrop');
 
 			}
 
-			lastScrollTop = Math.max(currentScrollTop, 0);
+			$body.removeClass('nav-hidden');
 			scrollTicking = false;
 
 		}
@@ -155,6 +163,8 @@
 			}
 
 		});
+
+		updateScrollState();
 
 	// Background.
 		$wrapper._parallax(0.925);
