@@ -4183,7 +4183,7 @@ input, select, textarea {
 			width: 100%;
 			height: 100%;
 			background-color: #212931;
-			background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../images/bg1.jpg");
+			background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../images/bg2.png");
 			background-size: auto,								auto,														100% auto;
 			background-position: center,								center,														top center;
 			background-repeat: repeat,								no-repeat,													no-repeat;
@@ -6887,7 +6887,7 @@ input, select, textarea {
 		--firefly-line: rgba(255, 255, 255, 0.68);
 		background:
 			linear-gradient(135deg, rgba(248, 250, 252, 0.74), rgba(239, 246, 255, 0.68)),
-			url("../../images/bg1.jpg") center center / cover fixed,
+			url("../../images/bg2.png") center center / cover fixed,
 			#f8fafc !important;
 		color: var(--firefly-ink);
 	}
@@ -7459,6 +7459,97 @@ input, select, textarea {
 
 		body.prism-theme.firefly-blog .firefly-tabs {
 			padding: 0.6rem;
+		}
+
+	}
+
+/* Shared Transparent Background Layer */
+
+	body.prism-theme,
+	body.prism-theme.firefly-blog {
+		background:
+			linear-gradient(135deg, rgba(248, 250, 252, 0.46), rgba(239, 246, 255, 0.38)),
+			url("../../images/bg2.png") center center / cover fixed,
+			#f8fafc !important;
+	}
+
+	body.prism-theme #wrapper,
+	body.prism-theme.firefly-blog #wrapper {
+		background: transparent !important;
+	}
+
+	body.prism-theme #header .logo,
+	body.prism-theme #nav,
+	body.prism-theme #navPanelToggle {
+		background: rgba(255, 255, 255, 0.52) !important;
+		backdrop-filter: blur(18px) saturate(1.08);
+		border-color: rgba(255, 255, 255, 0.64) !important;
+		box-shadow: 0 1.15rem 2.65rem rgba(15, 23, 42, 0.12);
+	}
+
+	body.prism-theme .profile-card,
+	body.prism-theme .side-card,
+	body.prism-theme .prism-section,
+	body.prism-theme .blog-card,
+	body.prism-theme .post-article {
+		background: rgba(255, 255, 255, 0.56) !important;
+		backdrop-filter: blur(18px) saturate(1.08);
+		border-color: rgba(255, 255, 255, 0.62) !important;
+		box-shadow: 0 1.25rem 3rem rgba(15, 23, 42, 0.12);
+	}
+
+	body.prism-theme .quick-grid div,
+	body.prism-theme .card-grid article,
+	body.prism-theme .skill-columns div,
+	body.prism-theme .timeline article,
+	body.prism-theme .paper-list article,
+	body.prism-theme .blog-topic-row span,
+	body.prism-theme .post-tags span,
+	body.prism-theme .post-content blockquote,
+	body.prism-theme .post-content :not(pre) > code {
+		background: rgba(255, 255, 255, 0.42) !important;
+		backdrop-filter: blur(12px) saturate(1.06);
+		border-color: rgba(255, 255, 255, 0.54) !important;
+	}
+
+	body.prism-theme.firefly-blog {
+		--firefly-panel: rgba(255, 255, 255, 0.5);
+		--firefly-panel-strong: rgba(255, 255, 255, 0.62);
+		--firefly-line: rgba(255, 255, 255, 0.56);
+	}
+
+	body.prism-theme.firefly-blog .firefly-panel,
+	body.prism-theme.firefly-blog .firefly-tabs,
+	body.prism-theme.firefly-blog .firefly-post-card {
+		background: var(--firefly-panel) !important;
+		backdrop-filter: blur(18px) saturate(1.08);
+		border-color: var(--firefly-line) !important;
+	}
+
+	body.prism-theme.firefly-blog .firefly-tabs a,
+	body.prism-theme.firefly-blog .firefly-profile-widget img {
+		background: rgba(255, 255, 255, 0.36) !important;
+	}
+
+	@media screen and (max-width: 736px) {
+
+		body.prism-theme,
+		body.prism-theme.firefly-blog {
+			background:
+				linear-gradient(135deg, rgba(248, 250, 252, 0.54), rgba(239, 246, 255, 0.48)),
+				url("../../images/bg2.png") center center / cover scroll,
+				#f8fafc !important;
+		}
+
+		body.prism-theme .profile-card,
+		body.prism-theme .side-card,
+		body.prism-theme .prism-section,
+		body.prism-theme .blog-card,
+		body.prism-theme .post-article,
+		body.prism-theme.firefly-blog .firefly-panel,
+		body.prism-theme.firefly-blog .firefly-tabs,
+		body.prism-theme.firefly-blog .firefly-post-card {
+			background: rgba(255, 255, 255, 0.62) !important;
 		}
 
 	}
