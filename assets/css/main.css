@@ -7471,9 +7471,12 @@ input, select, textarea {
 
 	body.prism-theme,
 	body.prism-theme.firefly-blog {
-		background:
-			url("../../images/bg2.png") center center / cover fixed,
-			#dce6f3 !important;
+		background-color: #dce6f3 !important;
+		background-image: url("../../images/bg2.png") !important;
+		background-position: center center !important;
+		background-repeat: no-repeat !important;
+		background-size: cover !important;
+		background-attachment: fixed !important;
 		color: #172033;
 	}
 
@@ -7487,13 +7490,15 @@ input, select, textarea {
 
 	body.prism-theme #wrapper:after,
 	body.prism-theme.firefly-blog #wrapper:after {
-		background:
-			linear-gradient(135deg, rgba(226, 235, 248, 0.46), rgba(255, 235, 232, 0.34)),
-			url("../../images/bg2.png") center center / cover fixed,
-			#dce6f3;
+		background-color: #dce6f3;
+		background-image: url("../../images/bg2.png");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
 		content: '';
-		filter: blur(6px) saturate(1.06);
-		inset: -1.5rem;
+		filter: blur(8px) saturate(1.08);
+		inset: -1.75rem;
 		opacity: 0;
 		pointer-events: none;
 		position: fixed;
@@ -7550,6 +7555,34 @@ input, select, textarea {
 		text-align: left;
 	}
 
+	body.prism-theme .profile-panel,
+	body.prism-theme.firefly-blog .firefly-sidebar,
+	body.prism-theme.firefly-blog .firefly-post-aside {
+		position: static !important;
+		top: auto !important;
+	}
+
+	body.prism-theme #backToTop {
+		background: rgba(255, 255, 255, 0.64) !important;
+		backdrop-filter: blur(14px) saturate(1.08);
+		border-color: rgba(255, 255, 255, 0.72) !important;
+		bottom: 1.6rem !important;
+		height: 5.4rem !important;
+		overflow: hidden;
+		position: fixed !important;
+		right: 1.6rem !important;
+		width: 5.4rem !important;
+		z-index: 1002 !important;
+	}
+
+	body.prism-theme #backToTop img {
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1.32);
+		transform-origin: center;
+		width: 100%;
+	}
+
 	body.prism-theme .profile-card,
 	body.prism-theme .side-card,
 	body.prism-theme .prism-section,
@@ -7603,6 +7636,7 @@ input, select, textarea {
 
 	body.prism-theme #wrapper {
 		animation: prism-soft-reveal 0.42s ease both;
+		transform: none !important;
 	}
 
 	body.is-preload.prism-theme #wrapper {
@@ -7612,12 +7646,10 @@ input, select, textarea {
 	@keyframes prism-soft-reveal {
 		from {
 			opacity: 0.94;
-			transform: translateY(0.2rem);
 		}
 
 		to {
 			opacity: 1;
-			transform: translateY(0);
 		}
 	}
 
@@ -7712,19 +7744,31 @@ input, select, textarea {
 
 		body.prism-theme,
 		body.prism-theme.firefly-blog {
-			background:
-				url("../../images/bg2.png") center center / cover scroll,
-				#dce6f3 !important;
+			background-color: #dce6f3 !important;
+			background-image: url("../../images/bg2.png") !important;
+			background-position: center center !important;
+			background-repeat: no-repeat !important;
+			background-size: cover !important;
+			background-attachment: fixed !important;
 		}
 
 		body.prism-theme #wrapper:after,
 		body.prism-theme.firefly-blog #wrapper:after {
-			background:
-				linear-gradient(135deg, rgba(226, 235, 248, 0.52), rgba(255, 235, 232, 0.42)),
-				url("../../images/bg2.png") center center / cover scroll,
-				#dce6f3;
-			filter: blur(4px) saturate(1.04);
+			background-color: #dce6f3;
+			background-image: url("../../images/bg2.png");
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-attachment: fixed;
+			filter: blur(6px) saturate(1.05);
 			inset: -0.75rem;
+		}
+
+		body.prism-theme #backToTop {
+			bottom: 1rem !important;
+			height: 4.5rem !important;
+			right: 1rem !important;
+			width: 4.5rem !important;
 		}
 
 		body.prism-theme .profile-card,
@@ -7757,4 +7801,16 @@ input, select, textarea {
 			font-size: clamp(1.22rem, 7vw, 2.1rem);
 		}
 
+	}
+
+	body.prism-theme.content-backdrop #wrapper:after,
+	body.prism-theme.firefly-blog #wrapper:after {
+		opacity: 1 !important;
+	}
+
+	body.show-back-to-top.prism-theme #backToTop {
+		opacity: 1 !important;
+		pointer-events: auto !important;
+		position: fixed !important;
+		transform: translateY(0) scale(1) !important;
 	}
