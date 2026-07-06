@@ -6941,8 +6941,7 @@ input, select, textarea {
 		width: min(calc(100vw - 1.5rem), 980px);
 	}
 
-	body.prism-theme.firefly-blog #main.prism-main.firefly-blog-main > *,
-	body.prism-theme.firefly-blog #main.prism-main.firefly-post-main > * {
+	body.prism-theme.firefly-blog #main.prism-main.firefly-blog-main > * {
 		padding: 0 !important;
 	}
 
@@ -7269,7 +7268,11 @@ input, select, textarea {
 
 	body.prism-theme.firefly-blog .firefly-post-article {
 		min-width: 0;
-		padding: clamp(1rem, 2vw, 1.45rem) !important;
+		padding: clamp(1.35rem, 3vw, 2.25rem) !important;
+	}
+
+	body.prism-theme.firefly-blog #main.prism-main.firefly-post-main > .firefly-post-article {
+		padding: clamp(1.35rem, 3vw, 2.25rem) !important;
 	}
 
 	body.prism-theme.firefly-blog .firefly-post-header {
