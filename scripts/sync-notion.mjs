@@ -134,7 +134,12 @@ async function pageToPost(page) {
   const image = textValue(getProperty(page, 'Image'));
 
   const blocks = await notionToMarkdown.pageToMarkdown(page.id);
-  const markdown = notionToMarkdown.toMarkdownString(blocks).parent.trim();
+  const markdownResult = notionToMarkdown.toMarkdownString(blocks);
+
+  const markdown =
+    typeof markdownResult === 'string'
+      ? markdownResult.trim()
+      : (markdownResult.parent ?? '').trim();
 
   return {
     title,
