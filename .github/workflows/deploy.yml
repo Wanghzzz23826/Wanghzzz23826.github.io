@@ -43,7 +43,7 @@ jobs:
       - name: Sync Notion posts
         run: pnpm sync:notion
         env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_TOKEN: ${{  secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
 
       - name: Build Astro site
