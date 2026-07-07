@@ -40,6 +40,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Check Notion env
+        run: |
+          echo "NOTION_TOKEN exists: $([[ -n "$NOTION_TOKEN" ]] && echo yes || echo no)"
+          echo "NOTION_DATABASE_ID length: ${#NOTION_DATABASE_ID}"
+          echo "NOTION_DATABASE_ID format check:"
+          if [[ "$NOTION_DATABASE_ID" =~ ^[a-fA-F0-9-]{32,36}$ ]]; then
+            echo "valid format"
+          else
+            echo "invalid format"
+            exit 1
+          fi
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+
       - name: Sync Notion posts
         run: pnpm sync:notion
         env:
