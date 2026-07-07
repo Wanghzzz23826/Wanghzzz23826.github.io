@@ -1,0 +1,96 @@
+---
+import BackToTop from '../../../components/BackToTop.astro';
+import BlogPostCard from '../../../components/BlogPostCard.astro';
+import HeaderNav from '../../../components/HeaderNav.astro';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import {
+  formatDate,
+  getPostUrl,
+  getPostsByTag,
+  getPublishedPosts,
+  getTagStats,
+  getTagUrl
+} from '../../../lib/posts';
+
+export async function getStaticPaths() {
+  const allPosts = await getPublishedPosts();
+  const tagStats = getTagStats(allPosts);
+
+  return tagStats.map((tag) => ({
+    params: { tag: tag.slug },
+    props: { tag }
+  }));
+}
+
+const { tag } = Astro.props;
+const allPosts = await getPublishedPosts();
+const tagStats = getTagStats(allPosts);
+const posts = getPostsByTag(allPosts, tag.name);
+---
+<SiteLayout
+  title={`#${tag.name} | Blog | Caiwei Wang`}
+  description={`Posts tagged ${tag.name} from Caiwei Wang.`}
+  bodyClass="blog-page firefly-blog"
+>
+  <HeaderNav active="blog" />
+
+  <main id="main" class="prism-main blog-main firefly-blog-main firefly-tag-main">
+    <aside class="firefly-sidebar firefly-left-rail" aria-label="Blog tags">
+      <section class="firefly-panel firefly-category-widget">
+        <p class="section-kicker">Tags</p>
+        <nav class="firefly-tag-list" aria-label="Blog tags">
+          {tagStats.map((item) => (
+            <a class={item.slug === tag.slug ? 'active' : undefined} href={getTagUrl(item.name)}>
+              <span>#{item.name}</span>
+              <strong>{item.count}</strong>
+            </a>
+          ))}
+        </nav>
+      </section>
+    </aside>
+
+    <section class="firefly-feed" aria-label={`Posts tagged ${tag.name}`}>
+      <div class="firefly-tabs">
+        <a href="/blog/" class="firefly-tab-home icon solid fa-home"><span class="label">Blog Home</span></a>
+        <a href="/blog/">All <span>{allPosts.length}</span></a>
+        <a href={getTagUrl(tag.name)} class="active">#{tag.name} <span>{posts.length}</span></a>
+      </div>
+
+      <section class="firefly-panel firefly-hero-card">
+        <p class="section-kicker">Tag Archive</p>
+        <h1>#{tag.name}</h1>
+        <p>{posts.length} post{posts.length === 1 ? '' : 's'} collected under this tag.</p>
+      </section>
+
+      {posts.length > 0 ? (
+        <div class="blog-list firefly-post-list">
+          {posts.map((post) => <BlogPostCard post={post} />)}
+        </div>
+      ) : (
+        <section class="firefly-panel">
+          <p>No published posts in this tag yet.</p>
+        </section>
+      )}
+    </section>
+
+    <aside class="firefly-sidebar firefly-right-rail" aria-label={`Directory for ${tag.name}`}>
+      <section class="firefly-panel firefly-directory-widget">
+        <p class="section-kicker">Directory</p>
+        <nav class="firefly-post-directory" aria-label={`Posts tagged ${tag.name}`}>
+          {posts.map((post) => (
+            <a href={getPostUrl(post)}>
+              <span>{post.data.title}</span>
+              <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+            </a>
+          ))}
+        </nav>
+      </section>
+    </aside>
+  </main>
+
+  <BackToTop />
+
+  <div id="copyright">
+    <ul><li>&copy; Caiwei Wang</li><li><a href="/blog/">Blog archive</a></li></ul>
+  </div>
+</SiteLayout>

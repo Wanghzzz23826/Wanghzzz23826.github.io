@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import BackToTop from '../../components/BackToTop.astro';
 import HeaderNav from '../../components/HeaderNav.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { formatDate, getPostSlug, getPublishedPosts } from '../../lib/posts';
+import { formatDate, getPostSlug, getPublishedPosts, getTagUrl } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const coverImage = post.data.image || '/images/pic09.jpg';
+const coverImage = post.data.image?.trim();
 ---
 <SiteLayout
   title={`${post.data.title} | Caiwei Wang`}
@@ -27,7 +27,7 @@ const coverImage = post.data.image || '/images/pic09.jpg';
 
   <main id="main" class="prism-main blog-main firefly-post-main">
     <article class="firefly-panel post-article firefly-post-article">
-      <header class="post-header firefly-post-header">
+      <header class:list={['post-header', 'firefly-post-header', coverImage ? 'has-cover' : 'without-cover']}>
         <div>
           <p class="section-kicker">{post.data.category}</p>
           <h1>{post.data.title}</h1>
@@ -38,11 +38,11 @@ const coverImage = post.data.image || '/images/pic09.jpg';
           </div>
           {post.data.tags.length > 0 && (
             <div class="post-tags" aria-label="Post tags">
-              {post.data.tags.map((tag) => <span>#{tag}</span>)}
+              {post.data.tags.map((tag) => <a href={getTagUrl(tag)}>#{tag}</a>)}
             </div>
           )}
         </div>
-        <img src={coverImage} alt="" />
+        {coverImage && <img src={coverImage} alt="" />}
       </header>
 
       <div class="post-content">

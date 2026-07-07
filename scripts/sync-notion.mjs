@@ -22,6 +22,16 @@ function getProperty(page, name) {
   return page.properties?.[name];
 }
 
+function firstTextValue(page, names) {
+  for (const name of names) {
+    const value = textValue(getProperty(page, name));
+
+    if (value) return value;
+  }
+
+  return '';
+}
+
 function textValue(property) {
   if (!property) return '';
 
@@ -55,6 +65,18 @@ function checkboxValue(property) {
 function multiSelectValue(property) {
   if (property?.type !== 'multi_select') return [];
   return property.multi_select.map((item) => item.name);
+}
+
+function notionCoverUrl(page) {
+  if (page.cover?.type === 'external') {
+    return page.cover.external?.url ?? '';
+  }
+
+  if (page.cover?.type === 'file') {
+    return page.cover.file?.url ?? '';
+  }
+
+  return '';
 }
 
 function slugify(value, fallback) {
@@ -127,11 +149,11 @@ async function pageToPost(page) {
   const rawSlug = textValue(getProperty(page, 'Slug'));
   const fallbackSlug = `post-${page.id.replace(/-/g, '').slice(0, 10)}`;
   const slug = slugify(rawSlug || title, fallbackSlug);
-  const published = dateOnly(textValue(getProperty(page, 'Published')));
+  const published = dateOnly(firstTextValue(page, ['Published', 'Publish date']));
   const description = textValue(getProperty(page, 'Description'));
   const tags = multiSelectValue(getProperty(page, 'Tags'));
-  const category = textValue(getProperty(page, 'Category')) || 'Notes';
-  const image = textValue(getProperty(page, 'Image'));
+  const category = textValue(getProperty(page, 'Category')) || tags[0] || 'Notes';
+  const image = textValue(getProperty(page, 'Image')) || notionCoverUrl(page);
 
   const blocks = await notionToMarkdown.pageToMarkdown(page.id);
   const markdownResult = notionToMarkdown.toMarkdownString(blocks);
