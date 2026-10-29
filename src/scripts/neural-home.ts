@@ -1,7 +1,9 @@
 import { createNeuron, drawNeuron } from './neural-morphology';
+import { initializePointerRipples } from './pointer-ripples';
 
 const body = document.body;
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+initializePointerRipples(motion);
 const hero = document.querySelector<HTMLElement>('.home-hero');
 const heroText = document.querySelector<HTMLElement>('.home-hero-inner');
 const links = [...document.querySelectorAll<HTMLAnchorElement>('.neural-nav a[href^="#"]')];
@@ -113,20 +115,27 @@ if (canvas && context && hero) {
     // Cap decorative animation at ~30fps and stop it while the hero is covered.
     if (!motion.matches && now - lastFrame < 32) { frame = requestAnimationFrame(draw); return; }
     lastFrame = now;
-    pointer.x += (pointer.targetX - pointer.x) * .045;
-    pointer.y += (pointer.targetY - pointer.y) * .045;
+    pointer.x += (pointer.targetX - pointer.x) * .085;
+    pointer.y += (pointer.targetY - pointer.y) * .085;
     ctx.clearRect(0, 0, width, height);
     const elapsed = releasedAt ? Math.max(0, (now - releasedAt) / 1600) : 0;
     const spread = motion.matches ? 1 : 1 - Math.pow(1 - Math.min(elapsed, 1), 3);
     const time = motion.matches ? 0 : now / 1000;
     ctx.save();
-    ctx.translate(pointer.x * 11, pointer.y * 8);
-    for (const neuron of neurons) {
+    // Independent depths make the larger movement read as parallax, rather than
+    // shifting the entire background as one flat picture. Text remains stationary.
+    const travelX = Math.min(68, width * .075);
+    const travelY = Math.min(48, height * .07);
+    for (const [index, neuron] of neurons.entries()) {
+      const depth = [.8, 1.15, .45][index];
+      ctx.save();
+      ctx.translate(pointer.x * travelX * depth, pointer.y * travelY * depth);
       drawNeuron(ctx, neuron, width, height, time, .3 + spread * .65);
+      ctx.restore();
     }
     for (const p of particles) {
-      const x = (.5 + (p.x - .5) * spread) * width + pointer.x * p.depth * 16;
-      const y = (.48 + (p.y - .48) * spread) * height + Math.sin(time * .18 + p.phase) * 4 + pointer.y * p.depth * 12;
+      const x = (.5 + (p.x - .5) * spread) * width + pointer.x * travelX * (1 + p.depth);
+      const y = (.48 + (p.y - .48) * spread) * height + Math.sin(time * .18 + p.phase) * 4 + pointer.y * travelY * (1 + p.depth);
       // Dim particles behind the title instead of competing with its letterforms.
       const central = x > width * .25 && x < width * .75 && y > height * .3 && y < height * .65;
       ctx.fillStyle = `rgba(190,221,214,${central ? .13 : .35 + Math.sin(time * .5 + p.phase) * .16})`;
@@ -148,7 +157,9 @@ if (canvas && context && hero) {
   observer.observe(heroBoundary);
   hero.addEventListener('pointermove', event => {
     if (motion.matches || event.pointerType !== 'mouse') return;
-    pointer.targetX = event.clientX / width - .5; pointer.targetY = event.clientY / height - .5;
+    const bounds = hero.getBoundingClientRect();
+    pointer.targetX = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / width * 2 - 1));
+    pointer.targetY = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / height * 2 - 1));
   }, { passive: true });
   hero.addEventListener('pointerleave', () => { pointer.targetX = 0; pointer.targetY = 0; });
   document.addEventListener('visibilitychange', requestDraw);
