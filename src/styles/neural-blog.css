@@ -1,0 +1,205 @@
+/* Archive, tag results, and articles share the homepage's ink/paper/signal palette. */
+body.prism-theme.neural-blog {
+  background: #0f1b24 !important;
+}
+
+body.prism-theme.neural-blog #main.prism-main {
+  width: min(90%, 1380px);
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 145px 0 4rem;
+  grid-template-columns: minmax(170px, 210px) minmax(0, 1fr) minmax(155px, 185px);
+  gap: 2.6rem;
+}
+
+body.neural-blog .firefly-sidebar {
+  display: grid;
+  align-content: start;
+  align-self: start;
+  gap: 2rem;
+  min-width: 0;
+}
+
+body.neural-blog :is(.firefly-panel, .firefly-tabs, .firefly-post-card) {
+  background: transparent !important;
+  border: 0;
+  border-color: var(--line) !important;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+}
+
+body.neural-blog .firefly-sidebar .firefly-panel {
+  border-top: 1px solid var(--line);
+  padding-top: 1.3rem;
+}
+
+body.neural-blog .firefly-profile-widget { text-align: left; }
+body.neural-blog .firefly-profile-widget img {
+  display: block;
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  margin: 0 0 1rem;
+  background: transparent;
+}
+
+body.neural-blog :is(h1,h2,h3) {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -.025em;
+  line-height: 1.25;
+}
+
+body.neural-blog .firefly-sidebar h2 { font-size: 1.4rem; margin-bottom: .8rem; }
+body.neural-blog .firefly-note-widget h2 { font-size: 1.1rem; }
+body.neural-blog .firefly-sidebar p { color: var(--muted); font-size: 14px; line-height: 1.85; }
+body.neural-blog .firefly-socials { display: flex; gap: 1rem; }
+body.neural-blog .firefly-socials a { color: var(--accent); border: 0; }
+body.neural-blog .firefly-feed { min-width: 0; display: flex; flex-direction: column; }
+body.neural-blog .firefly-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 2.6rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+body.neural-blog .firefly-tabs a {
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--muted);
+  border: 0;
+  position: relative;
+}
+body.neural-blog .firefly-tabs a.active { color: var(--accent); }
+body.neural-blog .firefly-tabs a.active::after {
+  content: ''; position: absolute; bottom: -.45rem; left: 0; right: 0;
+  height: 1px; background: var(--accent); box-shadow: 0 0 8px rgba(139,196,183,.4);
+}
+body.neural-blog .firefly-tabs a span { margin-left: .25rem; opacity: .65; }
+body.neural-blog .firefly-hero-card { padding: 0 0 2.8rem; }
+body.neural-blog .firefly-hero-card h1 {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  margin: 0 0 1.2rem;
+  max-width: 14ch;
+  font-style: italic;
+}
+body.neural-blog .firefly-hero-card p:not(.section-kicker) { color: var(--muted); font-size: 16px; max-width: 45ch; }
+body.neural-blog .section-kicker { color: var(--accent); }
+body.neural-blog .firefly-post-list { display: grid; gap: 0; }
+body.neural-blog .firefly-post-card {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(120px, 30%);
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+  transition: border-color .25s;
+}
+body.neural-blog .firefly-post-card.without-cover { grid-template-columns: 1fr; }
+body.neural-blog .firefly-post-card:hover { transform: none; border-color: var(--accent); box-shadow: none; }
+body.neural-blog .firefly-post-card h3 { font-size: 1.85rem; margin: .8rem 0 1rem; }
+body.neural-blog .firefly-post-card h3 a { border: 0; }
+body.neural-blog .firefly-post-card p { color: var(--muted); font-size: 16px; line-height: 1.85; }
+body.neural-blog .post-meta {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+  font-family: 'Segoe UI',Arial,sans-serif; font-size: 12px; font-weight: 400;
+  letter-spacing: .04em; color: var(--muted); text-transform: none;
+}
+body.neural-blog .post-meta span::before { content: '/'; margin-right: .6rem; color: var(--accent); }
+body.neural-blog .post-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+body.neural-blog .post-tags a {
+  background: transparent !important; border: 1px solid var(--line); border-radius: 2px;
+  font-family: 'Segoe UI',Arial,sans-serif; font-size: 12px; font-weight: 400;
+  color: var(--accent); text-transform: none; letter-spacing: 0; padding: .15rem .5rem;
+}
+body.neural-blog .post-tags a:hover { border-color: var(--accent); }
+body.neural-blog .read-more {
+  display: inline-block; border: 0; color: var(--accent);
+  font-family: 'Segoe UI',Arial,sans-serif; font-size: 13px; font-weight: 400;
+  letter-spacing: .02em; text-transform: none;
+}
+body.neural-blog .read-more::after { content: ' ↗'; }
+body.neural-blog .firefly-post-cover { display: block; align-self: center; border: 0; }
+body.neural-blog .firefly-post-cover img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+body.neural-blog :is(.firefly-tag-list,.firefly-post-directory) { display: grid; gap: .6rem; }
+body.neural-blog :is(.firefly-tag-list,.firefly-post-directory) a {
+  display: flex; justify-content: space-between; gap: .75rem;
+  font-size: 13px; color: var(--muted); padding: .5rem 0; border-bottom: 1px solid var(--line);
+}
+body.neural-blog .firefly-tag-list a.active { color: var(--accent); }
+body.neural-blog .firefly-post-directory a { flex-direction: column; }
+body.neural-blog .firefly-post-directory time { color: var(--accent); font-size: 11px; }
+body.neural-blog dl { display: grid; gap: .6rem; margin: 0; font-size: 13px; }
+body.neural-blog dl > div { display: flex; justify-content: space-between; gap: .7rem; }
+body.neural-blog dt { color: var(--muted); font-weight: 400; }
+body.neural-blog dd { margin: 0; text-align: right; }
+body.neural-blog .firefly-calendar-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 1rem; }
+body.neural-blog .firefly-calendar-head strong { font-weight: 400; }
+body.neural-blog :is(.firefly-calendar-grid,.firefly-calendar-weekdays) { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: .3rem; }
+body.neural-blog :is(.firefly-calendar-grid,.firefly-calendar-weekdays) span {
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1; font-size: 11px; color: var(--muted); border-radius: 2px;
+}
+body.neural-blog .firefly-calendar-grid .heat-0 { background: rgba(139,196,183,.035); }
+body.neural-blog .firefly-calendar-grid .heat-1 { background: rgba(139,196,183,.16); }
+body.neural-blog .firefly-calendar-grid .heat-2 { background: rgba(139,196,183,.28); }
+body.neural-blog .firefly-calendar-grid .heat-3 { background: rgba(139,196,183,.4); }
+body.neural-blog .firefly-calendar-grid .heat-4 { background: rgba(139,196,183,.6); color: #0c1720; }
+body.neural-blog .blog-pagination { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); padding: 1.5rem 0; font-size: 13px; }
+body.neural-blog #copyright ul { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+body.neural-blog #copyright li { padding: 0; border: 0; }
+
+/* Article measure and code blocks stay readable for long technical notes. */
+body.prism-theme.neural-blog #main.prism-main.firefly-post-main {
+  display: block; width: min(calc(100% - 48px), 850px); max-width: 850px;
+}
+body.prism-theme.neural-blog #main.prism-main > .firefly-post-article {
+  background: transparent !important; border: 0; box-shadow: none; border-radius: 0;
+  padding: 0 !important; backdrop-filter: none;
+}
+body.neural-blog .firefly-post-header { display: block; text-align: left; }
+body.neural-blog .post-header h1 { font-size: clamp(2.4rem,5vw,4.1rem); line-height: 1.15; margin: 0 0 1.5rem; }
+body.neural-blog .post-description { color: var(--muted); font-size: 18px; }
+body.neural-blog .firefly-post-header img { width: 100%; max-height: 440px; object-fit: cover; margin-top: 2rem; border-radius: 2px; }
+body.neural-blog .post-content { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); color: #c6d0d3; overflow-wrap: anywhere; }
+body.neural-blog .post-content :is(p,li) { font-size: 17px; font-weight: 400; line-height: 1.95; }
+body.neural-blog .post-content :is(h2,h3,h4) { color: var(--ink); margin: 2rem 0 1rem; letter-spacing: -.01em; }
+body.neural-blog .post-content h2 { font-size: 2rem; }
+body.neural-blog .post-content h3 { font-size: 1.5rem; }
+body.neural-blog .post-content h4 { font-family: 'Segoe UI',Arial,sans-serif; font-size: 1.1rem; font-weight: 500; }
+body.neural-blog .post-content a { color: var(--accent); }
+body.neural-blog .post-content blockquote { background: rgba(139,196,183,.045) !important; border-left: 2px solid var(--accent); padding: 1rem 1.5rem; color: var(--muted); }
+body.neural-blog .post-content pre { padding: 1.2rem; background: #091219 !important; border: 1px solid var(--line); border-radius: 2px; overflow-x: auto; }
+body.neural-blog .post-content pre code { border: 0; background: transparent; padding: 0; font-size: 14px; }
+body.neural-blog .post-content :not(pre) > code { color: #bddfce; background: rgba(139,196,183,.08) !important; border-color: var(--line); }
+body.neural-blog .post-content img { max-width: 100%; height: auto; }
+body.neural-blog .post-content table { display: block; overflow-x: auto; }
+body.neural-blog .post-content :is(th,td) { border-color: var(--line); }
+body.neural-blog .post-content th { color: var(--ink); }
+body.neural-blog .post-content tbody tr:nth-child(odd) { background: rgba(139,196,183,.035); }
+body.neural-blog .firefly-post-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 3rem 0 2rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+body.neural-blog .firefly-post-tools .read-more { display: block; margin-bottom: .7rem; }
+body.neural-blog .post-back-link { font-size: 14px; }
+
+@media (max-width: 1180px) {
+  body.prism-theme.neural-blog #main.prism-main { grid-template-columns: 190px minmax(0,1fr); gap: 2.5rem; }
+  body.neural-blog .firefly-right-rail { display: none; }
+}
+@media (max-width: 736px) {
+  body.prism-theme.neural-blog #main.prism-main { width: calc(100% - 40px); grid-template-columns: 1fr; padding-top: 140px; gap: 2.5rem; }
+  body.neural-blog .firefly-feed { order: 0; }
+  body.neural-blog .firefly-left-rail { order: 1; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.5rem; }
+  body.neural-blog .firefly-profile-widget { grid-column: 1 / -1; }
+  body.neural-blog .firefly-profile-widget img { float: right; margin: 0 0 1rem 1rem; }
+  body.neural-blog .firefly-tabs { gap: 1.2rem; }
+  body.neural-blog .firefly-post-card { grid-template-columns: 1fr; }
+  body.neural-blog .firefly-post-cover { order: -1; }
+  body.neural-blog .firefly-post-cover img { max-height: 220px; }
+  body.neural-blog .firefly-post-tools { grid-template-columns: 1fr; gap: 1.5rem; }
+  body.neural-blog .post-content :is(p,li) { font-size: 16px; }
+  body.neural-blog .post-header h1 { font-size: 2.5rem; overflow-wrap: anywhere; }
+}

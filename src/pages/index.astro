@@ -2,181 +2,127 @@
 import BackToTop from '../components/BackToTop.astro';
 import HeaderNav from '../components/HeaderNav.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import NeuronMark from '../components/NeuronMark.astro';
+
+// Completed work and project status follow the CV; prospective aims follow the RP.
+const projects = [
+  {
+    date: 'Jun 2026 — Present', title: 'Learning molecular dynamics from static structures',
+    subtitle: 'MD-informed representation learning · Tianfan Fu · Remote',
+    summary: 'Developing an early-stage framework to transfer dynamical information from molecular trajectories to static protein–ligand models.',
+    question: 'Can a model with only a static structure learn useful information about a complex’s dynamical stability and interactions?',
+    contribution: 'Curated and quality-controlled a subset of MISATO, designed trajectory-derived stability and interaction descriptors, and developed the initial data and modeling pipeline for dynamics-to-static knowledge distillation.',
+    status: 'Early-stage development; evaluation is ongoing.', tags: ['Representation learning', 'Molecular dynamics', 'Knowledge distillation']
+  },
+  {
+    date: 'Jan — Aug 2026', title: 'Modeling the visual cortex',
+    subtitle: 'Large-scale V1 modeling · Guozhang Chen · Remote',
+    summary: 'Contributed to a Tsinghua–Peking University collaborative project on biologically constrained cortical models and evolutionary training.',
+    question: 'How do neuronal dynamics, biological constraints, and learning rules shape the behavior and trainability of a cortical model?',
+    contribution: 'Helped migrate a large-scale V1 model from TensorFlow to BrainPy/JAX, including neuronal dynamics, connectivity, and simulation workflows. Integrated an LGN module and supported preliminary evolutionary training and experiments on visual change detection and DVS Gesture.',
+    status: 'Project participation completed in August 2026; evolutionary training was exploratory.', tags: ['Spiking networks', 'BrainPy / JAX', 'Evolutionary computation']
+  },
+  {
+    date: 'Nov 2025 — Present', title: 'Mapping brain–AI geometry',
+    subtitle: 'Brain–LLM alignment · Xi Jiang · UESTC',
+    summary: 'Comparing functional brain networks and Transformer representations in a shared graph-theoretic space, across datasets and the lifespan.',
+    question: 'Which cross-system similarities survive changes in datasets, observation views, and preprocessing?',
+    contribution: 'Extended shared-space analyses to SCZD, ABIDE I/II, MDD, and ADNI, examining distributions and deviations from controls. Independently designed a lifespan alignment framework using strength, topology, spectral, and manifold descriptors, with multi-site fMRI harmonization, preprocessing ablations, and null-model validation.',
+    status: 'Collaborative manuscript under revision for IEEE TPAMI; lifespan trajectory and robustness analyses are ongoing.', tags: ['Neuroimaging', 'Representational geometry', 'Multi-site harmonization']
+  },
+  {
+    date: 'Jul — Aug 2025', title: 'Learning to ask questions through behavior',
+    subtitle: 'Visiting student · Ru-Yuan Lab · Shanghai Jiao Tong University',
+    summary: 'Summer exposure to computational visual neuroscience, cognitive learning, and experimental approaches to perception.',
+    question: 'How can stimuli and behavioral tasks help reveal the computations behind perception?',
+    contribution: 'Joined group meetings, reviewed and presented literature, and participated in cognitive psychology experiments and discussions of experimental paradigms.',
+    status: 'Summer visit completed; this experience helped connect behavioral observations with computational questions.', tags: ['Visual neuroscience', 'Cognition', 'Experimental paradigms']
+  },
+  {
+    date: 'Nov 2024 — Sep 2025', title: 'From protein structure to function',
+    subtitle: 'Computational PETase engineering · Lixia Tang · UESTC',
+    summary: 'Built a computational structure–function pipeline to prioritize PETase mutants for experimental validation.',
+    question: 'How can structural and dynamical evidence guide the selection of promising enzyme variants?',
+    contribution: 'Combined AlphaFold3, induced-fit docking, metadynamics-based scoring, and molecular dynamics simulation to screen structurally stable candidates and support structure–function evaluation.',
+    status: 'Contributed computational analysis to a submitted PETase manuscript.', tags: ['Protein engineering', 'Structure–function analysis', 'Molecular simulation']
+  }
+];
 ---
-<SiteLayout
-  title="Caiwei Wang | Research Profile"
-  description="Caiwei Wang | Biomedical Engineering student interested in computational neuroscience, AI, and life science research."
->
-  <HeaderNav active="home" />
-
-  <section class="home-hero" aria-label="Landing introduction">
+<SiteLayout title="Caiwei Wang | Neuroscience & Computation" description="Caiwei Wang — Biomedical Engineering at UESTC. Exploring brain–AI alignment, neural dynamics, and computational principles across biological and artificial systems." bodyClass="neural-home">
+  <Fragment slot="head">
+    <script is:inline>
+      // Without JavaScript the page stays readable; a watchdog also releases the loader.
+      document.documentElement.classList.add('neural-js');
+      window.setTimeout(() => document.documentElement.classList.remove('neural-js'), 2400);
+    </script>
+  </Fragment>
+  <a class="skip-link" href="#main">Skip to profile</a>
+  <div class="neural-loader" aria-hidden="true">
+    <NeuronMark class="loader-neuron" />
+    <span>One signal. Many connections.</span>
+  </div>
+  <HeaderNav neural />
+  <section class="home-hero" aria-label="Welcome">
+    <canvas id="neural-field" aria-hidden="true"></canvas>
     <div class="home-hero-inner">
-      <h1>Follow Curiosity with Care.</h1>
-      <p>Turn every question into reproducible research.</p>
+      <p class="hero-overline">CAIWEI WANG / A PERSONAL EXPLORATION</p>
+      <h1>Welcome</h1>
+      <p class="hero-intro">I’m WCW. Welcome to my personal website.</p>
+      <p class="hero-disciplines">Neuroscience <span>·</span> Computation <span>·</span> Curiosity</p>
     </div>
-    <a href="#main" class="home-hero-arrow scrolly" aria-label="Scroll to profile"></a>
+    <a href="#main" class="home-hero-arrow" aria-label="Scroll to profile"><span>Explore below</span><svg viewBox="0 0 24 40" aria-hidden="true"><path d="M12 1v33M4 26l8 8 8-8"/></svg></a>
+    <span class="hero-coordinate" aria-hidden="true">01 — A SIGNAL TO BEGIN</span>
   </section>
-
-  <div id="main" class="prism-main">
-    <aside class="profile-panel">
-      <div class="profile-card">
-        <div class="profile-photo">
-          <img src="/images/pic01.png" alt="Portrait placeholder for Caiwei Wang" />
+  <div class="neural-content-surface">
+    <main id="main" class="prism-main">
+      <aside class="profile-panel" aria-label="Personal profile">
+        <div class="profile-card">
+          <div class="profile-photo"><img src="/images/pic01.png" alt="Caiwei Wang" width="300" height="300" loading="lazy" /></div>
+          <p class="eyebrow">Research profile</p>
+          <h2>Caiwei Wang</h2>
+          <p class="profile-title">Biomedical Engineering Undergraduate</p>
+          <p class="profile-affiliation">University of Electronic Science and Technology of China</p>
+          <p class="profile-interest">Finding connections between biological and artificial intelligence.</p>
+          <ul class="profile-facts"><li>Chengdu, China</li><li>2023–2027 · Expected graduation</li><li>GPA 3.86 / 4.0</li></ul>
+          <div class="profile-actions"><a href="mailto:wanghz23826@email.com" class="button primary">Get in touch ↗</a><a href="https://github.com/Wanghzzz23826" class="button">GitHub ↗</a></div>
         </div>
-        <p class="eyebrow">Research Profile</p>
-        <h1>Caiwei Wang</h1>
-        <p class="profile-title">Biomedical Engineering Undergraduate</p>
-        <p class="profile-affiliation">University of Electronic Science and Technology of China</p>
-        <p class="profile-interest">Exploring neuroscience, intelligent systems, and life science through reproducible research.</p>
-        <ul class="profile-facts">
-          <li>Chengdu, China</li>
-          <li>GPA 3.83 / 4.0</li>
-          <li>Undergraduate Researcher</li>
-        </ul>
-        <div class="profile-actions">
-          <a href="mailto:wanghz23826@email.com" class="button primary">Email Me</a>
-          <a href="#publications" class="button scrolly">View Work</a>
-        </div>
+        <div class="side-card"><h2>Questions I return to</h2><p>How do different systems learn, adapt, and arrive at shared structure?</p><div class="tag-cloud"><span>NeuroAI</span><span>Neural dynamics</span><span>Representation learning</span><span>Adaptive intelligence</span></div></div>
+      </aside>
+      <div class="content-flow">
+        <section class="prism-section" id="about" aria-labelledby="about-title">
+          <p class="section-kicker">01 / About</p>
+          <h2 id="about-title">Different systems.<br /><em>Connected questions.</em></h2>
+          <p class="section-lead">What can the similarities—and differences—between brains and artificial systems tell us about intelligence?</p>
+          <p>I am a Biomedical Engineering undergraduate at UESTC, interested in computational neuroscience, NeuroAI, and representation learning. I am drawn to questions that connect scales: how local dynamics give rise to global representations, and how systems with very different implementations can develop related forms of organization.</p>
+          <p>My path has brought together protein engineering, behavioral and neuroimaging perspectives, and large-scale spiking models. Across these projects, my interest has shifted from describing patterns to asking which computational principles can be tested, explained, and transferred between systems.</p>
+          <div class="quick-grid"><div><span>Starting point</span><strong>Neuroscience questions</strong></div><div><span>Working language</span><strong>Models, data & dynamics</strong></div><div><span>Long-term direction</span><strong>AI ↔ Neuroscience</strong></div></div>
+          <details class="research-note"><summary>How my interests developed <span aria-hidden="true">↗</span></summary><div><p>Early EEG and cognitive research introduced me to the challenge of inferring mechanisms from observations. Brain–LLM alignment made the comparison of different systems tangible; V1 modeling brought me closer to neuronal dynamics and the trade-offs between biological detail, trainability, and performance.</p><p>Protein simulations offered a parallel lesson: static structures reveal only part of a dynamic system. These experiences now motivate my interest in temporal representations, nonlinear dynamics, and learning from trajectories. I value hypotheses that can be challenged through controls, ablations, and interventions.</p></div></details>
+        </section>
+        <section class="prism-section" id="research" aria-labelledby="research-title">
+          <p class="section-kicker">02 / Research</p><h2 id="research-title">Selected research</h2><p class="section-description">Across scales, from molecular trajectories to cortical computation. Open a project to explore the question and my contribution.</p>
+          <div class="timeline">{projects.map(project => <article><span class="timeline-date">{project.date}</span><h3>{project.title}</h3><p class="role">{project.subtitle}</p><p>{project.summary}</p><details class="project-details"><summary>Explore project <span aria-hidden="true">↗</span></summary><div><h4>The question</h4><p>{project.question}</p><h4>My contribution</h4><p>{project.contribution}</p><div class="tag-cloud">{project.tags.map(tag => <span>{tag}</span>)}</div><p class="project-status">{project.status}</p></div></details></article>)}</div>
+          <div class="future-direction"><p class="section-kicker">Looking ahead / Proposed research</p><h3>From alignment to computational correspondence</h3><p>I want to understand when brain–AI similarity reflects a meaningful computational relationship. My proposed direction moves from robust, multi-view representational comparison to controlled dynamical tests and intervention-based validation.</p><ol><li><strong>Compare across views.</strong> Test geometry, topology, spectra, and manifolds against null models and held-out data.</li><li><strong>Follow the dynamics.</strong> Separate shared input statistics from shared state-transition structure.</li><li><strong>Test what transfers.</strong> Ask whether constrained mappings preserve the effects of interventions.</li></ol><p class="project-status">Future aims, rather than completed findings. Longer-term interests include adaptive world models and biologically informed learning rules.</p></div>
+        </section>
+        <section class="prism-section" id="publications" aria-labelledby="publications-title"><p class="section-kicker">03 / Publications</p><h2 id="publications-title">Writing & research output</h2>
+          <div class="paper-list">
+            <article><span class="paper-type">Published review</span><h3><a href="https://doi.org/10.12455/j.issn.1671-7104.250805">Multidimensional Modeling of Brain-Inspired Artificial Neural Networks and Its Applications in Medical Image Analysis ↗</a></h3><p><strong>Wang, C.</strong>, Chen, S., Jiang, X., & Yao, D.<br /><em>Chinese Journal of Medical Instrumentation</em> · In Chinese</p></article>
+            <article><span class="paper-type">Preprint / Under revision</span><h3><a href="https://arxiv.org/abs/2510.24342">A Unified Geometric Space for Topological Alignment Between Transformer-Based Models and Human Brain Networks ↗</a></h3><p>Chen, S., Chen, Y., <strong>Wang, C.</strong>, et al.<br />arXiv:2510.24342 (2025) · Under revision for IEEE TPAMI</p></article>
+            <article><span class="paper-type">Submitted manuscript / Contributor</span><h3>Function-Oriented Protein Engineering of <em>Is</em>PETase for Efficient Biodegradation of High-Crystallinity PET</h3><p>Contributed computational analysis and structure–function evaluation. Submitted to <em>ACS Catalysis</em>.</p></article>
+            <article><span class="paper-type">Patent application</span><h3>Highly Catalytically Active <em>Is</em>MHETase Mutants and Their Applications</h3><p>Chinese invention patent application · Publication No. CN119662597A</p></article>
+          </div>
+        </section>
+        <section class="prism-section" id="awards" aria-labelledby="awards-title"><p class="section-kicker">04 / Recognition</p><h2 id="awards-title">Building, together.</h2><p class="section-description">Projects that taught me ownership, collaboration, and the value of making an idea work.</p><div class="card-grid">
+          <article><span class="timeline-date">2024 / Gold Medal</span><h3>iGEM · SPETEX</h3><p>Modeling and Wiki Team Member. Used ESM-IF1, AlphaFold3, AutoDock, and GROMACS to support MHETase mutant prioritization, and developed components of the project wiki.</p></article>
+          <article><span class="timeline-date">2025 / University Third Prize</span><h3>Biomedical Engineering Innovation Design</h3><p>Led a project predicting carotid–femoral pulse wave velocity from PPG signals. Compared XGBoost, Random Forest, and CNN models, then deployed a local real-time inference pipeline.</p></article>
+          <article><span class="timeline-date">2025 / National Third Prize</span><h3>CP Cup · Market Survey & Analysis</h3><p>Modeling and data analysis using sentiment analysis, Random Forest feature ranking, and Bayesian neural networks.</p></article>
+          <article><span class="timeline-date">2023–2025 / Additional honors</span><h3>Curiosity beyond one discipline</h3><p>Sichuan Province Life Science Competition Second Prize (2025), Outstanding Student Scholarship (2024), and Best Debater, single round, Freshman Debate League (2023).</p></article>
+        </div><p class="outside-lab">Outside the lab: basketball, science communication, and conversations across disciplines.</p></section>
+        <section class="prism-section" id="skills" aria-labelledby="skills-title"><p class="section-kicker">05 / Toolkit</p><h2 id="skills-title">Tools for asking better questions.</h2><div class="skill-columns">
+          <div><h3>Code & computation</h3><p>Python, MATLAB, C, JavaScript, SQL, Verilog HDL, Linux shell scripting, Git</p></div><div><h3>Learning & data</h3><p>PyTorch, TensorFlow, JAX, BrainPy, scikit-learn, NumPy, Pandas, Matplotlib, Seaborn</p></div><div><h3>Neural & molecular systems</h3><p>EEGLAB, fMRI network analysis, multi-site harmonization, AlphaFold3, AutoDock, GROMACS</p></div><div><h3>Making things usable</h3><p>HTML, CSS, GSAP, MySQL, scientific visualization, reproducible analysis workflows</p></div>
+        </div><div class="contact-line"><p>Have a connected question?</p><a href="mailto:wanghz23826@email.com">Let’s talk <span aria-hidden="true">↗</span></a></div></section>
       </div>
-
-      <div class="side-card">
-        <h2>Research Interests</h2>
-        <div class="tag-cloud">
-          <span>Computational Neuroscience</span>
-          <span>Brain-Inspired Modeling</span>
-          <span>Neuroimaging</span>
-          <span>Machine Learning</span>
-          <span>Protein Engineering</span>
-          <span>Scientific Computing</span>
-        </div>
-      </div>
-    </aside>
-
-    <div class="content-flow">
-      <section class="prism-section" id="about">
-        <p class="section-kicker">About</p>
-        <h2>Turning interdisciplinary curiosity into reproducible research.</h2>
-        <p>I am a Biomedical Engineering student whose academic interests sit at the intersection of neuroscience, machine learning, and life science. I enjoy translating abstract research questions into structured workflows, computational models, and analyses that can be explained, reproduced, and extended.</p>
-        <div class="quick-grid">
-          <div>
-            <span>Current Focus</span>
-            <strong>Neuroscience + AI</strong>
-          </div>
-          <div>
-            <span>Degree Track</span>
-            <strong>B.M.Eng. 2023-2027</strong>
-          </div>
-          <div>
-            <span>Language</span>
-            <strong>Chinese / English</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="prism-section" id="research">
-        <p class="section-kicker">Research</p>
-        <h2>Selected Research Experience</h2>
-        <div class="timeline">
-          <article>
-            <span class="timeline-date">Jan 2026 - Present</span>
-            <h3>Large-Scale V1 Cortical Model Migration and Evolutionary Training</h3>
-            <p class="role">Undergraduate Researcher | Beijing, China</p>
-            <p>Participating in a Tsinghua University-Peking University collaborative brain-inspired modeling project. My work focuses on migrating a large-scale V1 cortical model from TensorFlow to BrainPy, adapting neuronal dynamics and simulation workflows, and supporting the early-stage replacement of BPTT with evolutionary computation.</p>
-          </article>
-          <article>
-            <span class="timeline-date">Nov 2025 - Present</span>
-            <h3>Cross-Dataset Analysis in a Brain-like Geometric Space</h3>
-            <p class="role">Undergraduate Researcher | Chengdu, China</p>
-            <p>Projecting neuroimaging datasets including SCZD, ABIDE I, ABIDE II, MDD, and ADNI into a shared geometric space derived from LLM head embeddings and graph-theoretic neuroimaging metrics for cross-dataset comparison.</p>
-          </article>
-          <article>
-            <span class="timeline-date">Jul 2025 - Aug 2025</span>
-            <h3>Ru-Yuan Lab, Shanghai Jiao Tong University</h3>
-            <p class="role">Visiting Student | Shanghai, China</p>
-            <p>Joined summer research activities in computational visual neuroscience and cognitive learning. Attended group meetings, conducted literature review and presentation, and participated in cognitive psychology experiments.</p>
-          </article>
-          <article>
-            <span class="timeline-date">Nov 2024 - Sep 2025</span>
-            <h3>Computational Protein Engineering of PETase</h3>
-            <p class="role">Undergraduate Researcher | Chengdu, China</p>
-            <p>Designed a structure-function analysis pipeline for PETase mutants using AlphaFold3, induced-fit docking, metadynamics-based scoring, and molecular dynamics simulation.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="prism-section" id="publications">
-        <p class="section-kicker">Output</p>
-        <h2>Publications, Manuscripts, and Patent Work</h2>
-        <div class="paper-list">
-          <article>
-            <span class="paper-type">Publication</span>
-            <h3>Multidimensional Modeling of Brain-Inspired Artificial Neural Networks and Its Applications in Medical Image Analysis</h3>
-            <p><strong>Wang, C.</strong>, Chen, S., Jiang, X., and Yao, D. <em>Chinese Journal of Medical Instrumentation</em>. DOI: 10.12455/j.issn.1671-7104.250805.</p>
-          </article>
-          <article>
-            <span class="paper-type">Manuscript Submitted</span>
-            <h3>Function-Oriented Protein Engineering of <em>Is</em>PETase for Efficient Biodegradation of High-Crystallinity PET</h3>
-            <p>Submitted to <em>ACS Catalysis</em>. Contributed to computational analysis and structure-function evaluation.</p>
-          </article>
-          <article>
-            <span class="paper-type">Patent Application</span>
-            <h3>Highly Catalytically Active <em>Is</em>MHETase Mutants and Their Applications</h3>
-            <p>Chinese invention patent application, Publication No. CN119662597A.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="prism-section" id="awards">
-        <p class="section-kicker">Recognition</p>
-        <h2>Competitions and Awards</h2>
-        <div class="card-grid">
-          <article>
-            <h3>iGEM Competition</h3>
-            <p>Gold Medal. Modeling and Wiki Team Member for SPETEX, contributing to mutation hotspot identification, structure prediction, docking, molecular dynamics simulation, and wiki development.</p>
-          </article>
-          <article>
-            <h3>CP Cup National Competition</h3>
-            <p>National Third Prize. Worked on modeling and data analysis using sentiment analysis, Random Forest ranking, and Bayesian neural network prediction.</p>
-          </article>
-          <article>
-            <h3>Biomedical Engineering Innovation Design</h3>
-            <p>Team Leader. Developed integrated models for noninvasive prediction of carotid-femoral pulse wave velocity from PPG signals.</p>
-          </article>
-          <article>
-            <h3>Additional Honors</h3>
-            <p>Outstanding Student Scholarship, Sichuan Province Life Science Competition Second Prize, and Best Debater in Freshman Debate League.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="prism-section" id="skills">
-        <p class="section-kicker">Skills</p>
-        <h2>Technical Background</h2>
-        <div class="skill-columns">
-          <div>
-            <h3>Programming</h3>
-            <p>Python, C, JavaScript, SQL, MATLAB, Verilog HDL, Linux shell scripting</p>
-          </div>
-          <div>
-            <h3>Machine Learning & Data</h3>
-            <p>PyTorch, TensorFlow, scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, JAX</p>
-          </div>
-          <div>
-            <h3>Scientific Computing</h3>
-            <p>AlphaFold3, AutoDock, GROMACS, protein structure modeling, molecular docking, molecular dynamics simulation</p>
-          </div>
-          <div>
-            <h3>Web & Database</h3>
-            <p>HTML5, CSS3, Bootstrap, GSAP, MySQL, ER modeling, database normalization</p>
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
+    <footer id="copyright"><span>© {new Date().getFullYear()} Caiwei Wang</span><span>Stay curious. Test carefully.</span><a href="/blog/">Research notes ↗</a></footer>
   </div>
-
   <BackToTop />
-
-  <div id="copyright">
-    <ul><li>&copy; Caiwei Wang</li><li>Theme inspired by <a href="https://github.com/xyjoey/PRISM">PRISM</a></li></ul>
-  </div>
 </SiteLayout>

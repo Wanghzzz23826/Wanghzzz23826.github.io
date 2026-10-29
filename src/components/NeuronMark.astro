@@ -1,0 +1,17 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<svg class={className} viewBox="0 0 100 140" fill="none" aria-hidden="true">
+  <!-- An asymmetric soma, tapering dendrites, and a long axon share one silhouette. -->
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path fill="currentColor" stroke="none" d="M43 39C39 35 35 34 31 33Q40 43 35 48L28 54Q40 50 45 56L48 63Q48 52 55 51L68 49Q56 46 57 39L60 29Q52 39 48 37L42 25Q46 37 43 39Z"/>
+    <path stroke-width="2" d="M42 40Q27 30 24 16M47 39Q44 26 49 14M55 42Q67 32 73 18M37 47Q25 49 16 59M47 54Q39 67 29 71M56 48Q69 49 79 59"/>
+    <path stroke-width="1" d="M26 22 16 17 12 8M24 17 26 7M19 18 10 20M45 25 38 15 39 6M48 18 57 9 59 2M65 29 62 17 65 9M69 23 80 21 86 13M23 53 13 47 6 49M20 55 16 67M38 62 27 61 20 65M34 68 34 80M70 53 82 48 91 51M76 57 79 68"/>
+    <path stroke-width="1.4" d="M49 56C44 74 65 77 60 92S48 108 55 118"/>
+    <path stroke-width="3.6" opacity=".65" d="M49 65Q49 70 53 74M59 81Q63 85 60 90M57 97 53 104"/>
+    <path stroke-width=".9" d="M55 117Q46 122 39 133M55 117Q58 128 64 135M55 117Q70 119 78 129M48 123 31 125M61 130 55 138M72 123 84 121"/>
+  </g>
+</svg>

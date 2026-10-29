@@ -1,0 +1,218 @@
+/* Home-only visual system. Legacy blog styles and the existing top sticker stay intact. */
+body.prism-theme.neural-home {
+  --ink: #edece6;
+  --muted: #a9b7bf;
+  --accent: #8bc4b7;
+  --line: rgba(151, 183, 187, .22);
+  --surface: #111d26;
+  background: #0c1720 !important;
+  color: var(--ink);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.8;
+  overflow-x: clip;
+}
+body.neural-home ::selection { background: #8bc4b7; color: #0c1720; }
+body.prism-theme.neural-home #wrapper { display: block; overflow: visible; padding: 0; }
+body.prism-theme.neural-home #wrapper::before,
+body.prism-theme.neural-home #wrapper::after { display: none !important; }
+body.prism-theme.neural-home :is(h1,h2,h3,h4,strong,b) { color: var(--ink); }
+body.prism-theme.neural-home :is(h1,h2,h3,h4) { text-transform: none; }
+body.prism-theme.neural-home p { text-align: left; margin: 0 0 1.3rem; }
+body.prism-theme.neural-home a { color: inherit; border-bottom-color: var(--line); }
+body.prism-theme.neural-home a:hover { color: var(--accent) !important; }
+body.neural-home :is(a,summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 2px; }
+body.neural-home .skip-link { position: fixed; top: -100px; left: 1rem; z-index: 3000; padding: .6rem 1rem; background: var(--surface); }
+body.neural-home .skip-link:focus { top: 1rem; }
+
+/* One compact fixed header on desktop; every section remains reachable on mobile. */
+body.neural-home .neural-header {
+  position: fixed; z-index: 1100; inset: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  height: 82px; padding: 0 clamp(1.5rem, 4.5vw, 5rem);
+  background: rgba(12,23,32,.86); backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent; transition: border-color .3s;
+}
+body.neural-home.is-scrolled .neural-header { border-color: var(--line); }
+body.neural-home .neural-brand { display: flex; align-items: center; gap: .65rem; border: 0; font-family: Georgia, serif; font-size: 1.15rem; letter-spacing: .18em; }
+body.neural-home .neural-brand svg { width: 37px; height: 37px; color: var(--accent); }
+body.neural-home .neural-nav { display: flex; gap: clamp(.9rem,2vw,2.2rem); }
+body.neural-home .neural-nav a { position: relative; padding: .7rem 0; border: 0; color: #bcc7cb; font-size: .86rem; letter-spacing: .035em; transition: color .25s, text-shadow .25s; white-space: nowrap; }
+body.neural-home .neural-nav a::after { content: ''; position: absolute; bottom: .35rem; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+body.neural-home .neural-nav a[aria-current] { color: #b7f1dc; text-shadow: 0 0 16px rgba(139,225,194,.65); }
+body.neural-home .neural-nav a[aria-current]::after,
+body.neural-home .neural-nav a:hover::after { transform: scaleX(1); }
+
+/* Sticky hero lets the opaque reading surface naturally slide over it. */
+body.prism-theme.neural-home .home-hero {
+  position: sticky; top: 0; z-index: 0; width: 100%; max-width: none;
+  height: 100svh; min-height: 620px; margin: 0; padding: 100px 1.5rem 120px;
+  background: radial-gradient(ellipse at 50% 45%,#14232c 0%,#0c1720 65%);
+  display: flex; align-items: center; justify-content: center; isolation: isolate;
+}
+body.neural-home #neural-field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+body.prism-theme.neural-home .home-hero-inner { max-width: 60rem; width: 100%; color: var(--ink); text-shadow: none; will-change: transform, opacity; }
+body.prism-theme.neural-home .home-hero h1 { font-family: 'Merriweather', Georgia, serif; font-weight: 400; font-style: italic; font-size: clamp(6rem,13vw,12.5rem); color: #f3efe5; line-height: 1.1; letter-spacing: -.065em; margin: 0 0 1.5rem; padding-right: .07em; }
+body.prism-theme.neural-home .home-hero p { text-align: center; font-family: 'Segoe UI',Arial,sans-serif; font-style: normal; font-weight: 400; text-shadow: none; max-width: none; }
+body.prism-theme.neural-home .home-hero .hero-overline { color: var(--muted); letter-spacing: .24em; font-size: .65rem; margin-bottom: 2.2rem; }
+body.prism-theme.neural-home .home-hero .hero-intro { color: var(--ink); font-size: clamp(1rem,1.65vw,1.45rem); letter-spacing: .055em; line-height: 1.65; }
+body.prism-theme.neural-home .home-hero .hero-disciplines { color: var(--accent); font-size: .7rem; text-transform: uppercase; letter-spacing: .26em; margin-top: 1.8rem; line-height: 2; }
+body.neural-home .hero-disciplines span { padding: 0 .65rem; }
+body.prism-theme.neural-home .home-hero-arrow { display: flex; align-items: center; flex-direction: column; gap: .7rem; bottom: 3.1rem; width: auto; height: auto; color: var(--muted) !important; filter: none; }
+body.prism-theme.neural-home .home-hero-arrow::before { display: none; }
+body.neural-home .home-hero-arrow span { font-size: .62rem; text-transform: uppercase; letter-spacing: .19em; }
+body.neural-home .home-hero-arrow svg { width: 19px; height: 32px; fill: none; stroke: var(--accent); stroke-width: 1; transition: transform .3s; }
+body.neural-home .home-hero-arrow:hover svg { transform: translateY(5px); }
+body.neural-home .hero-coordinate { position: absolute; bottom: 3.5rem; left: 4.5vw; color: #80969d; font-size: .58rem; letter-spacing: .18em; }
+
+/* Reading surface: existing profile/content columns, with editorial spacing. */
+body.neural-home .neural-content-surface { position: relative; z-index: 2; background: var(--surface); border-top: 1px solid var(--line); }
+body.prism-theme.neural-home #main.prism-main { width: min(88%,1240px); max-width: 1240px; padding: 5rem 0 2rem; gap: clamp(2.5rem,6vw,6rem); grid-template-columns: minmax(220px,280px) minmax(0,1fr); background: transparent !important; scroll-margin-top: 82px; }
+body.prism-theme.neural-home .profile-panel { display: block; position: static !important; }
+body.prism-theme.neural-home :is(.profile-card,.side-card,.prism-section) { background: transparent !important; border: 0 !important; border-radius: 0; box-shadow: none; backdrop-filter: none; padding: 0; }
+body.prism-theme.neural-home .profile-card { display: block; }
+body.prism-theme.neural-home .profile-photo { width: 104px; height: 104px; border-radius: 50%; border: 1px solid var(--line); margin-bottom: 1.7rem; }
+body.prism-theme.neural-home .profile-photo img { height: 100%; object-fit: cover; }
+body.prism-theme.neural-home .profile-card h2 { font-family: Georgia,serif; font-weight: 400; font-size: 2rem; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 1rem; }
+body.prism-theme.neural-home .profile-title { color: var(--ink); font-size: .85rem; font-weight: 400; line-height: 1.7; letter-spacing: 0; }
+body.prism-theme.neural-home :is(.profile-affiliation,.profile-interest,.profile-facts li,.side-card p) { color: var(--muted); font-size: .85rem; line-height: 1.8; }
+body.prism-theme.neural-home .profile-interest { border-top: 1px solid var(--line); margin-top: 1.3rem; padding-top: 1.3rem; }
+body.prism-theme.neural-home .profile-facts { list-style: none; padding: 1rem 0; border-color: var(--line); }
+body.prism-theme.neural-home .profile-facts li { padding: 0; }
+body.prism-theme.neural-home .profile-actions { gap: .65rem; }
+body.prism-theme.neural-home .button { background: transparent; border: 1px solid var(--line); border-radius: 0; box-shadow: none; color: var(--accent) !important; font-size: .65rem; font-weight: 400; letter-spacing: .06em; padding: 0 .9rem; height: 2.6rem; line-height: 2.5rem; }
+body.prism-theme.neural-home .button.primary { background: rgba(139,196,183,.08); border-color: #618b84; }
+body.prism-theme.neural-home .button:hover { border-color: var(--accent); background: rgba(139,196,183,.12); }
+body.prism-theme.neural-home .side-card { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line) !important; }
+body.prism-theme.neural-home .side-card h2 { font-weight: 400; font-size: 1rem; letter-spacing: 0; }
+body.prism-theme.neural-home .tag-cloud { gap: .4rem; }
+body.prism-theme.neural-home .tag-cloud span { background: transparent; border: 1px solid var(--line); border-radius: 2px; color: #adc8c6; font-size: .65rem; font-weight: 400; padding: .2rem .5rem; }
+body.prism-theme.neural-home .content-flow { display: block; min-width: 0; }
+body.prism-theme.neural-home .prism-section { padding: 0 0 4rem; margin-bottom: 4rem; border-bottom: 1px solid var(--line) !important; scroll-margin-top: 112px; }
+body.prism-theme.neural-home .prism-section:last-child { border-bottom: 0 !important; margin-bottom: 0; }
+body.prism-theme.neural-home :is(.eyebrow,.section-kicker,.paper-type,.timeline-date) { display: block; color: var(--accent); font-size: .65rem; font-weight: 400; letter-spacing: .17em; text-transform: uppercase; margin-bottom: 1.2rem; }
+body.prism-theme.neural-home .prism-section h2 { font-family: Georgia,serif; color: var(--ink); font-weight: 400; font-size: clamp(2rem,3.5vw,3.2rem); line-height: 1.2; letter-spacing: -.025em; margin-bottom: 1.7rem; }
+body.neural-home .prism-section h2 em { color: #b4d1c9; font-weight: 400; }
+body.prism-theme.neural-home .prism-section p { color: var(--muted); line-height: 1.85; font-weight: 400; }
+body.prism-theme.neural-home .prism-section .section-kicker { color: var(--accent); }
+body.prism-theme.neural-home .prism-section .section-lead { color: #d7e0df; font-size: 1.15rem; line-height: 1.65; }
+body.neural-home .section-description { font-size: .94rem; max-width: 42rem; }
+body.prism-theme.neural-home :is(.quick-grid div,.card-grid article,.skill-columns div,.timeline article,.paper-list article) { background: transparent !important; border: 0 !important; border-radius: 0; box-shadow: none; backdrop-filter: none; padding: 0; }
+body.prism-theme.neural-home .quick-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.25rem; margin: 2rem 0; padding: 1.5rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+body.prism-theme.neural-home .quick-grid span { color: var(--muted); font-size: .57rem; font-weight: 400; letter-spacing: .1em; }
+body.prism-theme.neural-home .quick-grid strong { font-size: .82rem; font-weight: 400; line-height: 1.5; display: block; }
+body.neural-home details { border: 0; }
+body.neural-home summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; cursor: pointer; color: var(--accent); font-size: .84rem; padding: .8rem 0; list-style: none; }
+body.neural-home summary::-webkit-details-marker { display: none; }
+body.neural-home summary span { transition: transform .25s; }
+body.neural-home details[open] > summary span { transform: rotate(90deg); }
+body.neural-home details[open] > div { animation: neural-unfold .3s ease both; }
+body.neural-home .research-note { border-bottom: 1px solid var(--line); }
+body.neural-home .research-note > div { padding: .5rem 0; }
+body.prism-theme.neural-home .timeline { position: relative; margin-top: 2.5rem; gap: 0; border-left: 1px solid var(--line); }
+/* Scroll distance sets the signal's exact length; reversing scroll retracts it. */
+body.neural-home .timeline::before {
+  content: ''; position: absolute; top: 0; left: -1px; width: 1px;
+  height: var(--signal-length, 0px); pointer-events: none;
+  background: linear-gradient(to bottom, rgba(139,196,183,.28), #8bc4b7 85%, #d7ffec);
+  box-shadow: 0 0 8px rgba(139,225,194,.4);
+}
+body.neural-home .timeline::after {
+  content: ''; position: absolute; left: -2px; top: max(0px,calc(var(--signal-length, 0px) - 24px));
+  width: 3px; height: min(24px,var(--signal-length, 0px)); pointer-events: none;
+  background: linear-gradient(transparent,#d7ffec); border-radius: 3px;
+  filter: drop-shadow(0 0 5px #8bc4b7); opacity: 0;
+}
+body.neural-home .timeline.signal-active::after { opacity: 1; }
+body.neural-home .timeline article.is-passed::before { background: #9fd8c1; }
+body.prism-theme.neural-home .timeline article { position: relative; margin-left: 1.7rem; padding-bottom: 2.6rem; }
+body.neural-home .timeline article::before { content: ''; position: absolute; top: .42rem; left: calc(-1.7rem - 4px); width: 7px; height: 7px; background: #608b87; border-radius: 50%; box-shadow: 0 0 0 5px var(--surface); transition: background .3s,box-shadow .3s; }
+body.neural-home .timeline article:is(:hover,:focus-within,.is-reading)::before { background: #b7f1dc; box-shadow: 0 0 0 5px var(--surface),0 0 18px rgba(139,225,194,.65); }
+body.prism-theme.neural-home .timeline-date { font-size: .63rem; margin-bottom: .65rem; }
+body.prism-theme.neural-home :is(.timeline,.paper-list,.future-direction) h3 { font-family: Georgia,serif; font-size: 1.5rem; line-height: 1.4; color: var(--ink); font-weight: 400; letter-spacing: -.01em; }
+body.prism-theme.neural-home .role { color: #9bb8b9 !important; font-size: .68rem; font-weight: 400; text-transform: none; letter-spacing: .025em; margin: .6rem 0 1rem; }
+body.neural-home .project-details > div { border-left: 1px solid var(--line); padding: .8rem 0 0 1.2rem; }
+body.neural-home .project-details h4 { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; margin: .5rem 0; }
+body.prism-theme.neural-home .project-details p { font-size: .9rem; }
+body.prism-theme.neural-home .prism-section .project-status { color: #96aaa9; font-size: .76rem; line-height: 1.7; margin-top: 1rem; }
+body.neural-home .future-direction { padding: 1.8rem 0 0; border-top: 1px solid var(--line); }
+body.neural-home .future-direction ol { color: var(--muted); padding-left: 1.3rem; font-size: .9rem; }
+body.neural-home .future-direction li { padding: 0 0 .8rem .3rem; }
+body.prism-theme.neural-home .paper-list { gap: 0; }
+body.prism-theme.neural-home .paper-list article { padding: 1.8rem 0; border-bottom: 1px solid var(--line) !important; }
+body.neural-home .paper-list h3 a { border: 0; transition: color .2s; }
+body.neural-home .paper-list .paper-type { font-size: .6rem; margin-bottom: .7rem; }
+body.prism-theme.neural-home .paper-list p { font-size: .86rem; margin: .8rem 0 0; }
+body.prism-theme.neural-home :is(.card-grid,.skill-columns) { gap: 2rem; }
+body.prism-theme.neural-home :is(.card-grid article,.skill-columns div) { border-top: 1px solid var(--line) !important; padding-top: 1.4rem; }
+body.prism-theme.neural-home :is(.card-grid,.skill-columns) h3 { font-size: 1.05rem; font-weight: 400; letter-spacing: 0; color: var(--ink); }
+body.prism-theme.neural-home :is(.card-grid,.skill-columns) p { font-size: .87rem; }
+body.prism-theme.neural-home .outside-lab { margin: 2rem 0 0; font-size: .85rem; }
+body.neural-home .contact-line { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+body.neural-home .contact-line a { font-family: Georgia,serif; font-size: 2rem; border: 0; }
+body.prism-theme.neural-home #copyright { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; width: min(88%,1240px); padding: 2rem 0; margin: 0 auto; border-top: 1px solid var(--line); color: var(--muted); font-size: .65rem; font-weight: 400; letter-spacing: .06em; text-transform: none; }
+
+/* Loader never blocks reading if the script is unavailable or motion is reduced. */
+body.neural-home .neural-loader { position: fixed; inset: 0; z-index: 2500; background: #0c1720; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 1.5rem; color: var(--accent); visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .4s,visibility .4s; }
+.neural-js body.neural-home:not(.neural-ready) .neural-loader { visibility: visible; opacity: 1; }
+body.neural-home .neural-loader svg { width: 180px; height: 100px; overflow: visible; }
+body.neural-home .neural-loader .loader-neuron { width: 110px; height: 154px; animation: neural-pulse 1.3s ease-in-out infinite alternate; }
+body.neural-home .neural-loader span { font-size: .65rem; letter-spacing: .14em; color: var(--muted); }
+body.neural-home .loader-soma { animation: neural-pulse .8s ease-in-out infinite alternate; transform-origin: center; }
+body.neural-home .loader-spike { stroke-dasharray: 180; animation: neural-trace 1.2s linear infinite; }
+@keyframes neural-pulse { from { opacity: .35; } to { opacity: 1; filter: drop-shadow(0 0 5px #8bc4b7); } }
+@keyframes neural-trace { from { stroke-dashoffset: 180; } to { stroke-dashoffset: -180; } }
+@keyframes neural-unfold { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 980px) {
+  body.neural-home .neural-header { padding: 0 1.5rem; gap: 1.5rem; }
+  body.neural-home .neural-nav { gap: 1rem; }
+  body.prism-theme.neural-home #main.prism-main { grid-template-columns: 210px minmax(0,1fr); gap: 2.5rem; }
+  body.prism-theme.neural-home .quick-grid { grid-template-columns: 1fr; gap: .9rem; }
+}
+@media (max-width: 736px) {
+  body.prism-theme.neural-home { font-size: 16px; }
+  body.neural-home .neural-header { height: 103px; padding: 10px 20px 0; flex-direction: column; justify-content: center; align-items: stretch; gap: 1px; }
+  body.neural-home .neural-brand { font-size: .85rem; width: fit-content; gap: .5rem; }
+  body.neural-home .neural-brand svg { width: 26px; height: 26px; }
+  body.neural-home .neural-nav { overflow-x: auto; gap: 1.1rem; scrollbar-width: none; min-height: 47px; }
+  body.neural-home .neural-nav a { font-size: .74rem; padding: .6rem 0; }
+  body.prism-theme.neural-home .home-hero { min-height: 580px; padding: 140px 20px 130px; }
+  body.prism-theme.neural-home .home-hero h1 { font-size: clamp(5rem,20vw,8rem); margin-bottom: 1.4rem; }
+  body.prism-theme.neural-home .home-hero .hero-overline { font-size: .5rem; letter-spacing: .14em; margin-bottom: 2rem; }
+  body.prism-theme.neural-home .home-hero .hero-intro { font-size: 1rem; max-width: 290px; margin: auto; }
+  body.prism-theme.neural-home .home-hero .hero-disciplines { font-size: .55rem; letter-spacing: .12em; }
+  body.neural-home .hero-disciplines span { padding: 0 .25rem; }
+  body.neural-home .hero-coordinate { display: none; }
+  body.prism-theme.neural-home #main.prism-main { width: calc(100% - 40px); grid-template-columns: 1fr; padding-top: 2.5rem; gap: 3rem; scroll-margin-top: 103px; }
+  body.prism-theme.neural-home .profile-card { display: block; }
+  body.prism-theme.neural-home .profile-photo { float: right; width: 80px; height: 80px; margin-left: 1rem; }
+  body.prism-theme.neural-home .side-card { display: block; }
+  body.prism-theme.neural-home .prism-section { scroll-margin-top: 128px; padding-bottom: 3rem; margin-bottom: 3rem; }
+  body.prism-theme.neural-home .quick-grid { grid-template-columns: 1fr; }
+  body.prism-theme.neural-home :is(.card-grid,.skill-columns) { grid-template-columns: 1fr; gap: 1rem; }
+  body.prism-theme.neural-home .timeline article { margin-left: 1.25rem; }
+  body.neural-home .timeline article::before { left: calc(-1.25rem - 4px); }
+  body.prism-theme.neural-home #copyright { width: calc(100% - 40px); padding-bottom: 6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.neural-home *,body.neural-home *::before,body.neural-home *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .neural-js body.neural-home .neural-loader { display: none; }
+  body.prism-theme.neural-home .home-hero { position: relative; }
+}
+
+/* The legacy stylesheet only loads Source Sans Pro at weight 900. Use a real
+   regular-weight system face for reading, without changing rem-based sticker sizing. */
+body.prism-theme.neural-home :is(.eyebrow,.section-kicker,.paper-type,.timeline-date,.profile-title,.quick-grid span,.role,.tag-cloud span,.button) { font-family: 'Segoe UI',Arial,sans-serif; }
+body.prism-theme.neural-home :is(.card-grid,.skill-columns) h3 { font-family: 'Segoe UI',Arial,sans-serif; }
+body.neural-home .neural-nav a { font-size: 14px; }
+body.prism-theme.neural-home :is(.profile-title,.profile-affiliation,.profile-interest,.profile-facts li,.side-card p) { font-size: 15px; }
+body.prism-theme.neural-home :is(.paper-list,.card-grid,.skill-columns,.project-details) p { font-size: 16px; }
+body.prism-theme.neural-home .prism-section .project-status { font-size: 14px; }
+body.prism-theme.neural-home .role { font-size: 13px; }
+body.prism-theme.neural-home .tag-cloud span { font-size: 12px; }
+body.prism-theme.neural-home .quick-grid strong { font-size: 14px; }
+body.prism-theme.neural-home .quick-grid span { font-size: 10px; }
+body.prism-theme.neural-home .future-direction ol { font-size: 16px; }
+@media (max-width:736px) { body.neural-home .neural-nav a { font-size: 12px; } }
